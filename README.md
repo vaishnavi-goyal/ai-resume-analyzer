@@ -30,6 +30,9 @@ ai-resume-analyzer/
 ├── output1.jpeg  
 └── output2.jpeg  
 
+# Run 
+streamlit rum aap.py
+
 # Install Dependencies
 ```bash
 pip install -r requirements.txt
