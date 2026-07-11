@@ -1,6 +1,9 @@
 # AI Resume Analyzer & Interview Bot
 AI-based Resume Analyzer built using Python and Streamlit that analyzes resumes, calculates ATS score, detects skills, generates interview questions, and provides answer evaluation.
 
+## 🚀 Live Demo
+https://ai-resume-analyzer-vaishnavi.streamlit.app/
+
 # Features
 - Upload Resume PDF
 - Extract Resume Text
