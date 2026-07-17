@@ -119,18 +119,6 @@ streamlit run app.py
 
 ---
 
-# 📷 Screenshots
-
-> Add screenshots here.
-
-### 🏠 Home Page
-
-<img width="100%" src="images/home.png">
-
-### 📊 ATS Dashboard
-
-<img width="100%" src="images/dashboard.png">
-
 ### 🤖 AI Review
 
 <img width="100%" src="images/review.png">
