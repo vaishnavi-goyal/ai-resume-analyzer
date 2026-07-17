@@ -1,5 +1,9 @@
 streamlit
+plotly
 PyPDF2
 scikit-learn
+reportlab
+google-generativeai
+python-dotenv
 pandas
 numpy
