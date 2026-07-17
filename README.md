@@ -134,15 +134,6 @@ streamlit run app.py
 
 ---
 
-# 📌 Future Improvements
-
-- User Authentication
-- Resume History
-- Multi-language Resume Support
-- Resume Ranking
-- AI Chat Assistant
-- LinkedIn Profile Analysis
-- Multiple Resume Comparison
 
 ---
 
