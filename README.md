@@ -1,4 +1,4 @@
-# 🤖 AI Resume Analyzer Pro
+# 🤖 AI Resume Analyzer 
 
 An AI-powered Resume Analyzer built with **Python, Streamlit, Machine Learning, and Google Gemini AI**. This application analyzes resumes against a job description, calculates an ATS score, identifies missing skills, provides AI-powered feedback, generates interview questions, and helps users improve their resumes.
 
