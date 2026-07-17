@@ -119,15 +119,6 @@ streamlit run app.py
 
 ---
 
-### 🤖 AI Review
-
-<img width="100%" src="images/review.png">
-
-### 🎤 Mock Interview
-
-<img width="100%" src="images/interview.png">
-
----
 
 # 📈 Workflow
 
