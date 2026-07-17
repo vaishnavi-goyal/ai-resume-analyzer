@@ -1,307 +1,810 @@
-# AI Resume Analyzer & Interview Bot
+# ==========================================================
+# IMPORTS
+# ==========================================================
+
 import streamlit as st
-import PyPDF2
-from sklearn.feature_extraction.text import CountVectorizer
-from sklearn.metrics.pairwise import cosine_similarity
 
-# ---------------------------------------------------
-# Function to Extract Text from PDF
-# ---------------------------------------------------
-def extract_text_from_pdf(pdf_file):
+from config import *
+from resume_parser import *
+from skills import *
+from ats import *
+from charts import *
+from ai_feedback import *
+from report import *
+from interview import *
+from gemini_ai import analyze_resume
 
-    pdf_reader = PyPDF2.PdfReader(pdf_file)
+# ==========================================================
+# PAGE CONFIG
+# ==========================================================
 
-    text = ""
-
-    for page in pdf_reader.pages:
-
-        extracted = page.extract_text()
-
-        if extracted:
-            text += extracted
-
-    return text
-
-
-# ---------------------------------------------------
-# Skills List
-# ---------------------------------------------------
-skills_list = [
-    "python",
-    "java",
-    "machine learning",
-    "sql",
-    "html",
-    "css",
-    "javascript",
-    "data science",
-    "tensorflow",
-    "pandas",
-    "numpy"
-]
-
-
-# ---------------------------------------------------
-# Streamlit UI
-# ---------------------------------------------------
 st.set_page_config(
-    page_title="AI Resume Analyzer",
+    page_title="AI Resume Analyzer Pro",
     page_icon="🤖",
-    layout="centered"
+    layout="wide",
+    initial_sidebar_state="expanded"
 )
 
-st.title("🤖 AI Resume Analyzer & Interview Bot")
+# ==========================================================
+# CUSTOM CSS
+# ==========================================================
 
-st.write(
-    "Upload your resume and get ATS score, interview questions and AI feedback."
-)
+st.markdown("""
+<style>
 
-# ---------------------------------------------------
-# Upload Resume
-# ---------------------------------------------------
-uploaded_file = st.file_uploader(
-    "Upload Resume (PDF)",
-    type=["pdf"]
-)
+.stApp{
+    background:#F3F6FB;
+}
 
-# ---------------------------------------------------
-# Job Description Input
-# ---------------------------------------------------
-job_description = st.text_area(
-    "Paste Job Description"
-)
+#MainMenu{
+visibility:hidden;
+}
 
-# ---------------------------------------------------
-# Main Logic
-# ---------------------------------------------------
-if uploaded_file is not None:
+footer{
+visibility:hidden;
+}
 
-    # Extract Resume Text
-    resume_text = extract_text_from_pdf(uploaded_file)
+header{
+visibility:hidden;
+}
 
-    # ---------------------------------------------------
-    # Resume Text
-    # ---------------------------------------------------
-    st.subheader("📄 Resume Text")
+.hero{
 
-    st.write(resume_text)
+background:linear-gradient(135deg,#0F172A,#1E3A8A);
 
-    # ---------------------------------------------------
-    # Skill Extraction
-    # ---------------------------------------------------
-    found_skills = []
+padding:35px;
 
-    for skill in skills_list:
+border-radius:25px;
 
-        if skill.lower() in resume_text.lower():
+text-align:center;
 
-            found_skills.append(skill)
+color:white;
 
-    # ---------------------------------------------------
-    # Show Skills
-    # ---------------------------------------------------
-    st.subheader("🛠️ Detected Skills")
+margin-bottom:25px;
 
-    if len(found_skills) > 0:
+box-shadow:0 15px 35px rgba(0,0,0,.2);
 
-        st.success(", ".join(found_skills))
+}
 
-    else:
+.card{
 
-        st.warning("No matching skills found.")
+background:white;
 
-    # ---------------------------------------------------
-    # ATS Score Calculation
-    # ---------------------------------------------------
-    if job_description:
+padding:20px;
 
-        text = [resume_text, job_description]
+border-radius:18px;
 
-        cv = CountVectorizer()
+box-shadow:0 8px 20px rgba(0,0,0,.08);
 
-        matrix = cv.fit_transform(text)
+margin-bottom:20px;
 
-        similarity = cosine_similarity(matrix)[0][1]
+}
 
-        ats_score = round(similarity * 100, 2)
+.stButton>button{
 
-        # ---------------------------------------------------
-        # Show ATS Score
-        # ---------------------------------------------------
-        st.subheader("📊 ATS Match Score")
+width:100%;
 
-        st.success(f"{ats_score}% Match")
+height:50px;
 
-        # ATS Feedback
-        if ats_score >= 80:
+font-size:18px;
 
-            st.success("Excellent Resume Match ")
+border-radius:12px;
 
-        elif ats_score >= 50:
+background:#2563EB;
 
-            st.warning("Good Match  Improve some skills.")
+color:white;
+
+border:none;
+
+}
+
+</style>
+""", unsafe_allow_html=True)
+
+# ==========================================================
+# HERO
+# ==========================================================
+
+st.markdown("""
+
+<div class="hero">
+
+<h1>🤖 AI Resume Analyzer Pro</h1>
+
+<h3>Smart ATS Checker • AI Resume Review • Mock Interview</h3>
+
+<p>
+
+Analyze your Resume using Artificial Intelligence
+
+</p>
+
+</div>
+
+""", unsafe_allow_html=True)
+
+# ==========================================================
+# SIDEBAR
+# ==========================================================
+
+with st.sidebar:
+
+    st.title("📌 Dashboard")
+
+    st.success("ATS Resume Analysis")
+
+    st.success("Skill Detection")
+
+    st.success("AI Resume Review")
+
+    st.success("PDF Report")
+
+    st.success("Mock Interview")
+
+    st.markdown("---")
+
+    st.info("Version 2.0")
+
+    st.caption("Developed by Vaishnavi Goyal")
+
+    # ==========================================================
+# RESUME UPLOAD
+# ==========================================================
+
+st.markdown("## 📄 Upload Resume")
+
+col1, col2 = st.columns(2)
+
+with col1:
+
+    uploaded_file = st.file_uploader(
+        "Upload Resume (PDF)",
+        type=["pdf"]
+    )
+
+with col2:
+
+    job_description = st.text_area(
+
+        "Paste Job Description",
+
+        height=250,
+
+        placeholder="""
+Example:
+
+Python Developer
+
+Skills Required:
+
+Python
+SQL
+Machine Learning
+Pandas
+NumPy
+Git
+Communication
+
+"""
+    )
+
+# ==========================================================
+# ANALYZE BUTTON
+# ==========================================================
+
+analyze = st.button("🚀 Analyze Resume")
+
+# ==========================================================
+# START ANALYSIS
+# ==========================================================
+
+if analyze:
+
+    if uploaded_file is None:
+
+        st.warning("⚠ Please upload your Resume.")
+
+        st.stop()
+
+    if job_description.strip() == "":
+
+        st.warning("⚠ Please paste Job Description.")
+
+        st.stop()
+
+    # ======================================================
+    # EXTRACT RESUME
+    # ======================================================
+
+    resume_text = extract_resume_text(
+        uploaded_file
+    )
+
+    stats = get_resume_statistics(
+        resume_text
+    )
+
+    st.success("✅ Resume Uploaded Successfully")
+
+    st.markdown("---")
+
+    # ======================================================
+    # RESUME STATISTICS
+    # ======================================================
+
+    st.subheader("📊 Resume Statistics")
+
+    c1, c2, c3 = st.columns(3)
+
+    with c1:
+
+        st.metric(
+
+            "Words",
+
+            stats["words"]
+
+        )
+
+    with c2:
+
+        st.metric(
+
+            "Characters",
+
+            stats["characters"]
+
+        )
+
+    with c3:
+
+        st.metric(
+
+            "Lines",
+
+            stats["lines"]
+
+        )
+
+    st.markdown("---")
+
+    st.subheader("📄 Resume Preview")
+
+    st.text_area(
+
+        "",
+
+        resume_text[:3000],
+
+        height=250
+
+    )
+
+    # ======================================================
+    # ATS SCORE
+    # ======================================================
+
+    ats_score = calculate_ats_score(
+
+        resume_text,
+
+        job_description
+
+    )
+
+    rating, status = get_resume_rating(
+
+        ats_score
+
+    )
+
+    feedback = get_feedback(
+
+        ats_score
+
+    )
+        # ======================================================
+    # SKILL DETECTION
+    # ======================================================
+
+    found_skills = detect_skills(
+        resume_text
+    )
+
+    missing_skills = get_missing_skills(
+        found_skills,
+        job_description
+    )
+
+    # ======================================================
+    # AI RESUME ANALYSIS
+    # ======================================================
+
+    summary = generate_summary(
+        ats_score,
+        found_skills,
+        missing_skills
+    )
+
+    sections = check_resume_sections(
+        resume_text
+    )
+
+    complete = completeness_score(
+        sections
+    )
+
+    strength = resume_strength(
+        ats_score,
+        complete,
+        found_skills
+    )
+
+    roles = recommend_roles(
+        found_skills
+    )
+
+    # ======================================================
+    # ATS DASHBOARD
+    # ======================================================
+
+    st.markdown("---")
+
+    st.subheader("📊 ATS Dashboard")
+
+    c1, c2, c3 = st.columns(3)
+
+    with c1:
+
+        st.metric(
+            "ATS Score",
+            f"{ats_score}%"
+        )
+
+    with c2:
+
+        st.metric(
+            "Rating",
+            rating
+        )
+
+    with c3:
+
+        st.metric(
+            "Status",
+            status
+        )
+
+    # ======================================================
+    # CHARTS
+    # ======================================================
+
+    left, right = st.columns(2)
+
+    with left:
+
+        st.plotly_chart(
+
+            ats_gauge(
+                ats_score
+            ),
+
+            use_container_width=True
+
+        )
+
+    with right:
+
+        st.plotly_chart(
+
+            skill_pie(
+
+                len(found_skills),
+
+                len(missing_skills)
+
+            ),
+
+            use_container_width=True
+
+        )
+
+    st.plotly_chart(
+
+        resume_bar(
+
+            stats["words"],
+
+            stats["characters"],
+
+            len(found_skills)
+
+        ),
+
+        use_container_width=True
+
+    )
+
+    # ======================================================
+    # SKILLS
+    # ======================================================
+
+    st.markdown("---")
+
+    st.subheader("🛠 Skills Analysis")
+
+    left, right = st.columns(2)
+
+    with left:
+
+        st.success("Detected Skills")
+
+        if found_skills:
+
+            for skill in found_skills:
+
+                st.write("✅", skill)
 
         else:
 
-            st.error("Low Match Improve your resume.")
+            st.warning("No Skills Found")
 
-    # ---------------------------------------------------
-    # Generate Interview Questions
-    # ---------------------------------------------------
-    st.subheader("Generated Interview Questions")
+    with right:
 
-    questions = []
+        st.error("Missing Skills")
 
-    if "python" in found_skills:
+        if missing_skills:
 
-        questions.append(
-            "Explain OOP concepts in Python."
+            for skill in missing_skills:
+
+                st.write("❌", skill)
+
+        else:
+
+            st.success("No Missing Skills 🎉")
+                # ======================================================
+    # AI RESUME INSIGHTS
+    # ======================================================
+
+    st.markdown("---")
+
+    st.subheader("🤖 AI Resume Insights")
+
+    for line in summary:
+
+        st.info(line)
+
+    c1, c2 = st.columns(2)
+
+    with c1:
+
+        st.metric(
+            "Resume Completeness",
+            f"{complete}%"
         )
 
-    if "machine learning" in found_skills:
+    with c2:
 
-        questions.append(
-            "What is train-test split in Machine Learning?"
+        st.metric(
+            "Resume Strength",
+            f"{strength}/100"
         )
 
-    if "sql" in found_skills:
+    st.markdown("---")
 
-        questions.append(
-            "Explain JOINs in SQL."
+    st.subheader("📄 Resume Sections")
+
+    for section, present in sections.items():
+
+        if present:
+
+            st.success(f"✅ {section}")
+
+        else:
+
+            st.error(f"❌ {section}")
+
+    # ======================================================
+    # CAREER RECOMMENDATIONS
+    # ======================================================
+
+    st.markdown("---")
+
+    st.subheader("💼 Recommended Job Roles")
+
+    for role in roles:
+
+        st.success(role)
+
+    # ======================================================
+    # PDF REPORT
+    # ======================================================
+
+    create_pdf_report(
+
+        "resume_report.pdf",
+
+        ats_score,
+
+        rating,
+
+        found_skills,
+
+        missing_skills,
+
+        feedback,
+
+        strength,
+
+        complete,
+
+        roles
+
+    )
+
+    with open("resume_report.pdf", "rb") as pdf:
+
+        st.download_button(
+
+            label="📥 Download Resume Report",
+
+            data=pdf,
+
+            file_name="AI_Resume_Report.pdf",
+
+            mime="application/pdf",
+
+            use_container_width=True
+
         )
 
-    if "javascript" in found_skills:
+    # ======================================================
+    # GEMINI AI REVIEW
+    # ======================================================
 
-        questions.append(
-            "Difference between var, let and const."
+    st.markdown("---")
+
+    st.subheader("🤖 Gemini AI Resume Review")
+
+    if st.button("✨ Generate AI Review"):
+
+        with st.spinner("Gemini AI is reviewing your resume..."):
+
+            try:
+
+                review = analyze_resume(
+
+                    resume_text,
+
+                    job_description
+
+                )
+
+                st.success("Analysis Completed")
+
+                st.markdown(review)
+
+            except Exception as e:
+
+                st.error(f"Gemini Error: {e}")
+
+    # ======================================================
+    # INTERVIEW
+    # ======================================================
+
+    st.markdown("---")
+
+    st.subheader("🎤 AI Mock Interview")
+
+    questions = generate_questions(
+        found_skills
+    )
+
+    if questions:
+
+        total = 0
+
+        for i, question in enumerate(questions):
+
+            st.write(f"### Question {i+1}")
+
+            st.info(question)
+
+            answer = st.text_area(
+
+                "Your Answer",
+
+                key=f"answer_{i}"
+
+            )
+
+            if answer:
+
+                score = answer_score(answer)
+
+                total += score
+
+                st.progress(score/100)
+
+                st.write(f"Score : {score}/100")
+
+        final_score = total // len(questions)
+
+        st.markdown("---")
+
+        st.metric(
+
+            "Interview Score",
+
+            f"{final_score}/100"
+
         )
 
-    if "java" in found_skills:
+        st.success(
 
-        questions.append(
-            "Explain inheritance in Java."
+            interview_result(final_score)
+
         )
+            # ======================================================
+    # COMPANY RESUME MATCH
+    # ======================================================
 
-    # Default Question
-    if len(questions) == 0:
+    st.markdown("---")
+    st.subheader("🏢 Company Resume Match")
 
-        questions.append(
-            "Tell me about yourself."
-        )
-
-    # ---------------------------------------------------
-    # Correct Keywords for AI Checking
-    # ---------------------------------------------------
-    correct_answers = {
-
-        "Explain OOP concepts in Python.": [
-            "class",
-            "object",
-            "inheritance",
-            "polymorphism",
-            "encapsulation"
-        ],
-
-        "What is train-test split in Machine Learning?": [
-            "training",
-            "testing",
-            "data",
-            "model",
-            "split"
-        ],
-
-        "Explain JOINs in SQL.": [
-            "inner join",
-            "left join",
-            "right join",
-            "table"
-        ],
-
-        "Difference between var, let and const.": [
-            "scope",
-            "block",
-            "reassign",
-            "javascript"
-        ],
-
-        "Explain inheritance in Java.": [
-            "parent",
-            "child",
-            "extends",
-            "reuse"
-        ]
+    companies = {
+        "Google": ["Python", "Machine Learning", "SQL", "Git"],
+        "Microsoft": ["Python", "Azure", "SQL", "C++"],
+        "Amazon": ["Python", "DSA", "SQL", "AWS"],
+        "TCS": ["Java", "SQL", "Communication"],
+        "Infosys": ["Python", "SQL", "Problem Solving"]
     }
 
-    # ---------------------------------------------------
-    # Show Questions + Take Answers
-    # ---------------------------------------------------
-    for i, q in enumerate(questions):
+    for company, required in companies.items():
 
-        st.write(f"### Question {i+1}")
-
-        st.write(q)
-
-        # ---------------------------------------------------
-        # User Answer Input
-        # ---------------------------------------------------
-        answer = st.text_area(
-            f"Your Answer for Question {i+1}",
-            key=i
+        matched = len(
+            set(found_skills).intersection(required)
         )
 
-        # ---------------------------------------------------
-        # AI Answer Evaluation
-        # ---------------------------------------------------
-        if answer:
+        score = int((matched / len(required)) * 100)
 
-            answer = answer.lower()
+        st.write(f"### {company}")
 
-            matched_keywords = 0
+        st.progress(score / 100)
 
-            # Check Keywords
-            if q in correct_answers:
+        st.write(f"Match Score : {score}%")
 
-                keywords = correct_answers[q]
+    # ======================================================
+    # CAREER ROADMAP
+    # ======================================================
 
-                for word in keywords:
+    st.markdown("---")
+    st.subheader("🎯 Career Roadmap")
 
-                    if word in answer:
+    if ats_score >= 80:
 
-                        matched_keywords += 1
+        st.success("""
+✅ Resume is strong.
 
-                # Accuracy Calculation
-                accuracy = (
-                    matched_keywords / len(keywords)
-                ) * 100
+Next Steps
 
-                st.write(
-                    f" Accuracy: {round(accuracy, 2)}%"
+• Apply for internships
+
+• Practice DSA
+
+• Build ML Projects
+
+• Prepare Interview Questions
+
+• Keep Updating Resume
+""")
+
+    elif ats_score >= 60:
+
+        st.warning("""
+Improve Resume
+
+• Add Projects
+
+• Add Certifications
+
+• Improve Skills
+
+• Optimize Resume Keywords
+
+• Practice Aptitude
+""")
+
+    else:
+
+        st.error("""
+Resume Needs Improvement
+
+• Learn Python
+
+• Learn SQL
+
+• Build Projects
+
+• Add Technical Skills
+
+• Improve ATS Score
+""")
+
+    # ======================================================
+    # AI COVER LETTER
+    # ======================================================
+
+    st.markdown("---")
+    st.subheader("📧 AI Cover Letter")
+
+    if st.button("Generate Cover Letter"):
+
+        prompt = f"""
+Write a professional cover letter.
+
+Resume
+
+{resume_text}
+
+Job Description
+
+{job_description}
+"""
+
+        with st.spinner("Generating Cover Letter..."):
+
+            try:
+
+                cover = analyze_resume(
+                    prompt,
+                    ""
                 )
 
-                # ---------------------------------------------------
-                # AI Feedback
-                # ---------------------------------------------------
-                if accuracy >= 70:
+                st.markdown(cover)
 
-                    st.success(
-                        " Correct Answer"
-                    )
+            except Exception as e:
 
-                elif accuracy >= 40:
+                st.error(e)
 
-                    st.warning(
-                        "Partially Correct Answer"
-                    )
+    # ======================================================
+    # AI RESUME REWRITER
+    # ======================================================
 
-                else:
+    st.markdown("---")
+    st.subheader("✨ AI Resume Rewriter")
 
-                    st.error(
-                        " Answer seems Incorrect"
-                    )
+    if st.button("Rewrite Resume"):
 
-            else:
+        prompt = f"""
+Rewrite this resume professionally.
 
-                st.info(
-                    "No AI evaluation available."
+Resume
+
+{resume_text}
+"""
+
+        with st.spinner("Improving Resume..."):
+
+            try:
+
+                improved = analyze_resume(
+                    prompt,
+                    ""
                 )
 
+                st.markdown(improved)
+
+            except Exception as e:
+
+                st.error(e)
+
+    # ======================================================
+    # FOOTER
+    # ======================================================
+
+    st.markdown("---")
+
+    st.caption(
+        "🤖 AI Resume Analyzer Pro | Developed by Vaishnavi Goyal"
+    )
