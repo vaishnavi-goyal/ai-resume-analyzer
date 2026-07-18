@@ -3,7 +3,6 @@
 # ==========================================================
 
 import streamlit as st
-
 from config import *
 from resume_parser import *
 from skills import *
@@ -19,7 +18,7 @@ from gemini_ai import analyze_resume
 # ==========================================================
 
 st.set_page_config(
-    page_title="AI Resume Analyzer Pro",
+    page_title="AI Resume Analyzer",
     page_icon="🤖",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -32,95 +31,243 @@ st.set_page_config(
 st.markdown("""
 <style>
 
+/* ==========================================================
+   MAIN APP
+========================================================== */
+
 .stApp{
-    background:#F3F6FB;
+    background: linear-gradient(to right,#EEF5FF,#F8FAFC);
 }
 
+/* Hide Streamlit Default UI */
+
 #MainMenu{
-visibility:hidden;
+    visibility:hidden;
 }
 
 footer{
-visibility:hidden;
+    visibility:hidden;
 }
 
 header{
-visibility:hidden;
+    visibility:hidden;
 }
+
+/* ==========================================================
+   HERO
+========================================================== */
 
 .hero{
 
-background:linear-gradient(135deg,#0F172A,#1E3A8A);
+background:linear-gradient(135deg,#0F172A,#2563EB);
 
-padding:35px;
+padding:40px;
 
-border-radius:25px;
+border-radius:22px;
 
 text-align:center;
 
 color:white;
 
-margin-bottom:25px;
+margin-bottom:30px;
 
-box-shadow:0 15px 35px rgba(0,0,0,.2);
+box-shadow:0px 12px 30px rgba(0,0,0,.2);
 
 }
 
-.card{
+.hero h1{
+
+color:white !important;
+
+font-size:42px;
+
+font-weight:bold;
+
+}
+
+.hero h3{
+
+color:#E2E8F0 !important;
+
+}
+
+.hero p{
+
+color:white !important;
+
+font-size:18px;
+
+}
+
+/* ==========================================================
+   HEADINGS
+========================================================== */
+
+h1,h2,h3,h4,h5,h6{
+
+color:#0F172A !important;
+
+font-weight:bold;
+
+}
+
+/* ==========================================================
+   TEXT
+========================================================== */
+
+p,label,span{
+
+color:#1E293B !important;
+
+font-size:16px;
+
+}
+
+/* ==========================================================
+   FILE UPLOADER
+========================================================== */
+
+[data-testid="stFileUploader"]{
 
 background:white;
 
-padding:20px;
+padding:18px;
 
 border-radius:18px;
 
-box-shadow:0 8px 20px rgba(0,0,0,.08);
+border:2px dashed #2563EB;
 
-margin-bottom:20px;
+box-shadow:0px 8px 20px rgba(0,0,0,.08);
 
 }
+
+/* Upload Text */
+
+[data-testid="stFileUploader"] *{
+
+color:#0F172A !important;
+
+}
+
+/* ==========================================================
+   TEXT AREA
+========================================================== */
+
+textarea{
+
+background:white !important;
+
+color:#111827 !important;
+
+border-radius:12px !important;
+
+border:2px solid #2563EB !important;
+
+font-size:15px !important;
+
+}
+
+/* Placeholder */
+
+textarea::placeholder{
+
+color:#64748B !important;
+
+}
+
+/* ==========================================================
+   INPUT BOX
+========================================================== */
+
+input{
+
+color:#111827 !important;
+
+}
+
+/* ==========================================================
+   BUTTON
+========================================================== */
 
 .stButton>button{
 
 width:100%;
 
-height:50px;
+height:52px;
 
-font-size:18px;
-
-border-radius:12px;
-
-background:#2563EB;
+background:linear-gradient(135deg,#2563EB,#1D4ED8);
 
 color:white;
 
+font-size:18px;
+
+font-weight:bold;
+
 border:none;
+
+border-radius:12px;
+
+transition:.3s;
+
+}
+
+.stButton>button:hover{
+
+background:linear-gradient(135deg,#1D4ED8,#1E40AF);
+
+transform:scale(1.02);
+
+}
+
+/* ==========================================================
+   METRICS
+========================================================== */
+
+[data-testid="metric-container"]{
+
+background:white;
+
+border-radius:15px;
+
+padding:15px;
+
+box-shadow:0px 8px 18px rgba(0,0,0,.08);
+
+}
+
+/* ==========================================================
+   SUCCESS / INFO
+========================================================== */
+
+.stSuccess{
+
+border-radius:12px;
+
+}
+
+.stInfo{
+
+border-radius:12px;
+
+}
+
+/* ==========================================================
+   SIDEBAR
+========================================================== */
+
+section[data-testid="stSidebar"]{
+
+background:#0F172A;
+
+}
+
+section[data-testid="stSidebar"] *{
+
+color:white !important;
 
 }
 
 </style>
-""", unsafe_allow_html=True)
-
-# ==========================================================
-# HERO
-# ==========================================================
-
-st.markdown("""
-
-<div class="hero">
-
-<h1>🤖 AI Resume Analyzer Pro</h1>
-
-<h3>Smart ATS Checker • AI Resume Review • Mock Interview</h3>
-
-<p>
-
-Analyze your Resume using Artificial Intelligence
-
-</p>
-
-</div>
-
 """, unsafe_allow_html=True)
 
 # ==========================================================
