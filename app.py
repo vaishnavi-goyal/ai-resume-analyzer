@@ -28,24 +28,20 @@ st.set_page_config(
 # CUSTOM CSS
 # ==========================================================
 
+# ==========================================================
+# CSS
+# ==========================================================
+
 st.markdown("""
 <style>
-
-/* ==========================================================
-   MAIN APP
-========================================================== */
 
 .stApp{
     background: linear-gradient(to right,#EEF5FF,#F8FAFC);
 }
 
-/* Hide Streamlit Default UI */
+/* Hide Streamlit Menu */
 
 #MainMenu{
-    visibility:hidden;
-}
-
-footer{
     visibility:hidden;
 }
 
@@ -53,265 +49,112 @@ header{
     visibility:hidden;
 }
 
-/* ==========================================================
-   HERO
-========================================================== */
+footer{
+    visibility:hidden;
+}
+
+/* Hero */
 
 .hero{
-
-background:linear-gradient(135deg,#0F172A,#2563EB);
-
-padding:40px;
-
-border-radius:22px;
-
-text-align:center;
-
-color:white;
-
-margin-bottom:30px;
-
-box-shadow:0px 12px 30px rgba(0,0,0,.2);
-
+    background:linear-gradient(135deg,#0F172A,#2563EB);
+    padding:40px;
+    border-radius:20px;
+    text-align:center;
+    margin-bottom:30px;
+    box-shadow:0px 10px 25px rgba(0,0,0,.2);
 }
 
 .hero h1{
-
-color:white !important;
-
-font-size:42px;
-
-font-weight:bold;
-
+    color:white !important;
+    font-size:42px;
+    margin:0;
 }
 
 .hero h3{
-
-color:#E2E8F0 !important;
-
+    color:#E2E8F0 !important;
+    margin-top:10px;
 }
 
 .hero p{
-
-color:white !important;
-
-font-size:18px;
-
+    color:white !important;
+    font-size:18px;
 }
 
-/* ==========================================================
-   HEADINGS
-========================================================== */
-
-h1,h2,h3,h4,h5,h6{
-
-color:#0F172A !important;
-
-font-weight:bold;
-
-}
-
-/* ==========================================================
-   TEXT
-========================================================== */
-
-p,label,span{
-
-color:#1E293B !important;
-
-font-size:16px;
-
-}
-
-/* ==========================================================
-   FILE UPLOADER
-========================================================== */
+/* Upload Box */
 
 [data-testid="stFileUploader"]{
-
-background:white;
-
-padding:18px;
-
-border-radius:18px;
-
-border:2px dashed #2563EB;
-
-box-shadow:0px 8px 20px rgba(0,0,0,.08);
-
+    background:white;
+    border:2px dashed #2563EB;
+    border-radius:15px;
+    padding:15px;
 }
 
 /* Upload Text */
 
 [data-testid="stFileUploader"] *{
-
-color:#0F172A !important;
-
+    color:#111827 !important;
 }
 
-/* ==========================================================
-   TEXT AREA
-========================================================== */
+/* Text Area */
 
 textarea{
-
-background:white !important;
-
-color:#111827 !important;
-
-border-radius:12px !important;
-
-border:2px solid #2563EB !important;
-
-font-size:15px !important;
-
+    background:white !important;
+    color:#111827 !important;
+    border:2px solid #2563EB !important;
+    border-radius:12px !important;
 }
 
-/* Placeholder */
+/* Labels */
 
-textarea::placeholder{
-
-color:#64748B !important;
-
+label{
+    color:#111827 !important;
+    font-weight:bold;
 }
 
-/* ==========================================================
-   INPUT BOX
-========================================================== */
-
-input{
-
-color:#111827 !important;
-
-}
-
-/* ==========================================================
-   BUTTON
-========================================================== */
+/* Button */
 
 .stButton>button{
-
-width:100%;
-
-height:52px;
-
-background:linear-gradient(135deg,#2563EB,#1D4ED8);
-
-color:white;
-
-font-size:18px;
-
-font-weight:bold;
-
-border:none;
-
-border-radius:12px;
-
-transition:.3s;
-
+    width:100%;
+    height:50px;
+    background:#2563EB;
+    color:white;
+    font-size:18px;
+    border:none;
+    border-radius:12px;
 }
 
 .stButton>button:hover{
-
-background:linear-gradient(135deg,#1D4ED8,#1E40AF);
-
-transform:scale(1.02);
-
+    background:#1D4ED8;
 }
 
-/* ==========================================================
-   METRICS
-========================================================== */
+/* Metrics */
 
 [data-testid="metric-container"]{
-
-background:white;
-
-border-radius:15px;
-
-padding:15px;
-
-box-shadow:0px 8px 18px rgba(0,0,0,.08);
-
-}
-
-/* ==========================================================
-   SUCCESS / INFO
-========================================================== */
-
-.stSuccess{
-
-border-radius:12px;
-
-}
-
-.stInfo{
-
-border-radius:12px;
-
-}
-
-/* ==========================================================
-   SIDEBAR
-========================================================== */
-
-section[data-testid="stSidebar"]{
-
-background:#0F172A;
-
-}
-
-section[data-testid="stSidebar"] *{
-
-color:white !important;
-
+    background:white;
+    border-radius:15px;
+    padding:15px;
+    box-shadow:0px 5px 15px rgba(0,0,0,.08);
 }
 
 </style>
 """, unsafe_allow_html=True)
-
 # ==========================================================
 # HERO SECTION
 # ==========================================================
 
 st.markdown("""
+<div class="hero">
 
-<div style="
+<h1>🤖 AI Resume Analyzer Pro</h1>
 
-background:linear-gradient(135deg,#0F172A,#2563EB);
+<h3>Smart ATS Checker • AI Resume Review • Mock Interview</h3>
 
-padding:35px;
-
-border-radius:20px;
-
-text-align:center;
-
-margin-bottom:30px;
-
-box-shadow:0px 10px 25px rgba(0,0,0,.2);
-
-">
-
-<h1 style="color:white;font-size:42px;margin-bottom:10px;">
-
-🤖 AI Resume Analyzer Pro
-
-</h1>
-
-<h3 style="color:#E2E8F0;">
-
-Smart ATS Checker • AI Resume Review • Mock Interview
-
-</h3>
-
-<p style="color:white;font-size:18px;">
-
-Upload your Resume, Compare with Job Description, Improve ATS Score & Get AI Powered Career Insights.
-
+<p>
+Upload your resume, compare it with the job description,
+improve your ATS score, and get AI-powered career insights.
 </p>
 
 </div>
-
 """, unsafe_allow_html=True)
 
 # ==========================================================
