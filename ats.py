@@ -1,25 +1,36 @@
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
-
 # ==========================================================
 # ATS SCORE
 # ==========================================================
 
 def calculate_ats_score(resume_text, job_description):
 
+    # None ko empty string bana do
+    resume_text = "" if resume_text is None else str(resume_text)
+    job_description = "" if job_description is None else str(job_description)
+
+    # Empty check
+    if resume_text.strip() == "" or job_description.strip() == "":
+        return 0
+
     text = [resume_text, job_description]
 
-    cv = CountVectorizer()
+    try:
 
-    matrix = cv.fit_transform(text)
+        cv = CountVectorizer()
 
-    similarity = cosine_similarity(matrix)[0][1]
+        matrix = cv.fit_transform(text)
 
-    score = round(similarity * 100, 2)
+        similarity = cosine_similarity(matrix)[0][1]
 
-    return score
+        score = round(similarity * 100, 2)
 
+        return score
+
+    except ValueError:
+        return 0
 
 # ==========================================================
 # ATS RATING
