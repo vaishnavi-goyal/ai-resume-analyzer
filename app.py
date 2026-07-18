@@ -225,6 +225,122 @@ textarea{
     color:#111827 !important;
     font-weight:bold;
 }
+
+/* ===========================
+   GLOBAL TEXT COLOR
+=========================== */
+
+html,
+body,
+div,
+span,
+p,
+label,
+small,
+strong,
+b,
+li{
+    color:#111827 !important;
+}
+
+/* ===========================
+   ALL HEADINGS
+=========================== */
+
+h1,h2,h3,h4,h5,h6{
+    color:#111827 !important;
+}
+
+/* ===========================
+   Streamlit Markdown
+=========================== */
+
+.stMarkdown,
+.stMarkdown p,
+.stMarkdown div{
+    color:#111827 !important;
+}
+
+/* ===========================
+   Streamlit Text
+=========================== */
+
+.stText{
+    color:#111827 !important;
+}
+
+/* ===========================
+   Metric
+=========================== */
+
+[data-testid="stMetricLabel"]{
+    color:#111827 !important;
+}
+
+[data-testid="stMetricValue"]{
+    color:#111827 !important;
+    font-weight:bold;
+}
+
+/* ===========================
+   Success / Info / Error
+=========================== */
+
+.stSuccess{
+    color:#111827 !important;
+}
+
+.stInfo{
+    color:#111827 !important;
+}
+
+.stWarning{
+    color:#111827 !important;
+}
+
+.stError{
+    color:#111827 !important;
+}
+
+/* ===========================
+   Progress Text
+=========================== */
+
+.stProgress{
+    color:#111827 !important;
+}
+
+/* ===========================
+   Buttons
+=========================== */
+
+button{
+    color:white !important;
+}
+
+/* ===========================
+   TextArea
+=========================== */
+
+textarea{
+    color:#111827 !important;
+}
+
+/* ===========================
+   Download Button
+=========================== */
+
+[data-testid="stDownloadButton"] *{
+    color:white !important;
+}
+
+/* ===========================
+   Write()
+=========================== */
+
+[data-testid="stMarkdownContainer"]{
+    color:#111827 !important;
+}
 </style>
 """, unsafe_allow_html=True)
 
