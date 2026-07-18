@@ -271,6 +271,50 @@ color:white !important;
 """, unsafe_allow_html=True)
 
 # ==========================================================
+# HERO SECTION
+# ==========================================================
+
+st.markdown("""
+
+<div style="
+
+background:linear-gradient(135deg,#0F172A,#2563EB);
+
+padding:35px;
+
+border-radius:20px;
+
+text-align:center;
+
+margin-bottom:30px;
+
+box-shadow:0px 10px 25px rgba(0,0,0,.2);
+
+">
+
+<h1 style="color:white;font-size:42px;margin-bottom:10px;">
+
+🤖 AI Resume Analyzer Pro
+
+</h1>
+
+<h3 style="color:#E2E8F0;">
+
+Smart ATS Checker • AI Resume Review • Mock Interview
+
+</h3>
+
+<p style="color:white;font-size:18px;">
+
+Upload your Resume, Compare with Job Description, Improve ATS Score & Get AI Powered Career Insights.
+
+</p>
+
+</div>
+
+""", unsafe_allow_html=True)
+
+# ==========================================================
 # SIDEBAR
 # ==========================================================
 
