@@ -217,10 +217,6 @@ h1,h2,h3,h4,h5,h6{
 textarea{
     color:#111827 !important;
 }
-
-</style>
-""", unsafe_allow_html=True)
-
 # /* ===========================
 #    Resume Preview
 # =========================== */
@@ -229,6 +225,9 @@ textarea{
     color:#111827 !important;
     font-weight:bold;
 }
+</style>
+""", unsafe_allow_html=True)
+
 # ==========================================================
 # HERO SECTION
 # ==========================================================
