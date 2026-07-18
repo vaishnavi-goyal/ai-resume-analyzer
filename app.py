@@ -8,12 +8,16 @@ from ai_feedback import *
 from report import *
 from interview import *
 from gemini_ai import analyze_resume
+
 st.set_page_config(
     page_title="AI Resume Analyzer Pro",
     page_icon="🤖",
     layout="wide",
     initial_sidebar_state="expanded"
 )
+# Load CSS
+with open("style.css", "r", encoding="utf-8") as f:
+    st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 with open("style.css", "r", encoding="utf-8") as f:
     st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
     if "resume_text" not in st.session_state: st.session_state.resume_text = ""
