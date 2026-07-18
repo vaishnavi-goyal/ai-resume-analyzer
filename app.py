@@ -172,9 +172,63 @@ label{
     padding:15px;
     box-shadow:0px 5px 15px rgba(0,0,0,.08);
 }
+# /* ===========================
+#    HEADINGS
+# =========================== */
+
+h1,h2,h3,h4,h5,h6{
+    color:#111827 !important;
+}
+
+# /* ===========================
+#    Metric Label
+# =========================== */
+
+[data-testid="stMetricLabel"]{
+    color:#111827 !important;
+    font-weight:600;
+}
+
+# /* ===========================
+#    Metric Value
+# =========================== */
+
+[data-testid="stMetricValue"]{
+    color:#111827 !important;
+    font-size:34px !important;
+    font-weight:bold;
+}
+
+# /* ===========================
+#    Metric Card
+# =========================== */
+
+[data-testid="metric-container"]{
+    background:white;
+    padding:18px;
+    border-radius:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+}
+
+# /* ===========================
+#    Text Area
+# =========================== */
+
+textarea{
+    color:#111827 !important;
+}
 
 </style>
 """, unsafe_allow_html=True)
+
+# /* ===========================
+#    Resume Preview
+# =========================== */
+
+[data-testid="stTextArea"] label{
+    color:#111827 !important;
+    font-weight:bold;
+}
 # ==========================================================
 # HERO SECTION
 # ==========================================================
@@ -879,3 +933,5 @@ Resume
     st.caption(
         "🤖 AI Resume Analyzer Pro | Developed by Vaishnavi Goyal"
     )
+
+
