@@ -94,6 +94,38 @@ color:#111827 !important;
     padding:15px;
 }
 
+/* Upload Area */
+
+[data-testid="stFileUploaderDropzone"]{
+    background:#F8FAFC !important;
+    border:2px dashed #3B82F6 !important;
+    border-radius:15px !important;
+}
+
+/* Upload Button */
+
+[data-testid="stFileUploader"] button{
+    background:#2563EB !important;
+    color:white !important;
+    border-radius:10px !important;
+    border:none !important;
+}
+
+/* Upload Text */
+
+[data-testid="stFileUploader"] small,
+[data-testid="stFileUploader"] span,
+[data-testid="stFileUploader"] p{
+    color:#475569 !important;
+    font-size:15px !important;
+}
+
+/* Remove Dark Background */
+
+[data-testid="stFileUploaderDropzone"] > div{
+    background:#F8FAFC !important;
+}
+
 /* Upload Text */
 
 [data-testid="stFileUploader"] *{
