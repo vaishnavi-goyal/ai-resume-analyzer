@@ -47,11 +47,12 @@ if "missing_skills" not in st.session_state:
 # CUSTOM CSS
 # ==========================================================
 
-st.markdown("""
-<style>
+/* ==========================================================
+   GLOBAL
+========================================================== */
 
 .stApp{
-    background:linear-gradient(to right,#EEF5FF,#F8FAFC);
+    background:linear-gradient(135deg,#EEF5FF,#F8FAFC);
 }
 
 /* Hide Streamlit */
@@ -68,102 +69,444 @@ footer{
     visibility:hidden;
 }
 
-/* ===========================
+/* ==========================================================
    HERO
-=========================== */
+========================================================== */
 
 .hero{
+
     background:linear-gradient(135deg,#0F172A,#2563EB);
-    padding:35px;
-    border-radius:20px;
+
+    padding:40px;
+
+    border-radius:22px;
+
     text-align:center;
-    margin-bottom:30px;
-    box-shadow:0px 10px 25px rgba(0,0,0,.2);
+
+    margin-bottom:35px;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.18);
+
 }
 
 .hero h1{
+
     color:white !important;
-    font-size:42px;
-    font-weight:bold;
+
+    font-size:44px;
+
+    font-weight:700;
+
+    margin-bottom:10px;
+
 }
 
 .hero h3{
+
     color:#E2E8F0 !important;
+
+    font-size:24px;
+
 }
 
 .hero p{
+
     color:white !important;
+
     font-size:18px;
+
 }
 
-/* ===========================
-   ALL HEADINGS
-=========================== */
+/* ==========================================================
+   HEADINGS
+========================================================== */
 
-h1:not(.hero h1),
-h2,
-h3:not(.hero h3),
-h4,
-h5,
-h6{
+h1,h2,h3,h4,h5,h6{
+
     color:#111827 !important;
+
+    font-weight:700 !important;
+
 }
 
-/* ===========================
+/* ==========================================================
    NORMAL TEXT
-=========================== */
+========================================================== */
 
-p:not(.hero p),
+p,
 span,
 label,
 small,
 strong,
 b,
-li,
-div{
+li{
+
     color:#111827 !important;
+
 }
 
-/* ===========================
-   METRICS
-=========================== */
+/* ==========================================================
+   UPLOAD BOX
+========================================================== */
+
+[data-testid="stFileUploader"]{
+
+    background:white !important;
+
+    border:2px dashed #3B82F6 !important;
+
+    border-radius:16px !important;
+
+    padding:18px;
+
+}
+
+/* Upload Area */
+
+[data-testid="stFileUploaderDropzone"]{
+
+    background:white !important;
+
+    border:none !important;
+
+}
+
+/* Upload Text */
+
+[data-testid="stFileUploader"] *{
+
+    color:#111827 !important;
+
+}
+/* ==========================================================
+   TEXT AREA
+========================================================== */
+
+textarea{
+
+    background:white !important;
+
+    color:#111827 !important;
+
+    border:2px solid #CBD5E1 !important;
+
+    border-radius:12px !important;
+
+    padding:12px !important;
+
+}
+
+/* Resume Preview */
+
+[data-testid="stTextArea"] textarea{
+
+    background:white !important;
+
+    color:#111827 !important;
+
+}
+
+/* ==========================================================
+   BUTTONS
+========================================================== */
+
+.stButton>button{
+
+    width:100%;
+
+    height:52px;
+
+    background:#2563EB !important;
+
+    color:white !important;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    border:none;
+
+    border-radius:12px;
+
+    transition:0.3s;
+
+}
+
+.stButton>button:hover{
+
+    background:#1D4ED8 !important;
+
+    transform:translateY(-2px);
+
+}
+
+/* Download Button */
+
+[data-testid="stDownloadButton"] button{
+
+    width:100%;
+
+    height:52px;
+
+    background:#10B981 !important;
+
+    color:white !important;
+
+    font-size:18px;
+
+    border:none;
+
+    border-radius:12px;
+
+}
+
+[data-testid="stDownloadButton"] button:hover{
+
+    background:#059669 !important;
+
+}
+
+/* ==========================================================
+   METRIC CARDS
+========================================================== */
+
+[data-testid="metric-container"]{
+
+    background:white !important;
+
+    border-radius:16px;
+
+    padding:18px;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+
+    border:1px solid #E5E7EB;
+
+}
 
 [data-testid="stMetricLabel"]{
+
     color:#111827 !important;
+
+    font-weight:bold;
+
 }
 
 [data-testid="stMetricValue"]{
-    color:#111827 !important;
+
+    color:#2563EB !important;
+
+    font-size:34px !important;
+
     font-weight:bold;
+
 }
 
-/* ===========================
-   FILE UPLOADER
-=========================== */
+/* ==========================================================
+   SIDEBAR
+========================================================== */
 
-[data-testid="stFileUploader"] *{
+section[data-testid="stSidebar"]{
+
+    background:#FFFFFF !important;
+
+    border-right:1px solid #E5E7EB;
+
+}
+
+section[data-testid="stSidebar"] *{
+
     color:#111827 !important;
+
+}
+/* ==========================================================
+   SUCCESS / WARNING / ERROR BOXES
+========================================================== */
+
+.stSuccess,
+.stInfo,
+.stWarning,
+.stError{
+
+    border-radius:12px !important;
+
+    padding:10px !important;
+
 }
 
-/* ===========================
-   TEXT AREA
-=========================== */
+/* ==========================================================
+   PROGRESS BAR
+========================================================== */
 
-textarea{
+.stProgress > div > div > div{
+
+    background:#2563EB !important;
+
+}
+
+/* ==========================================================
+   EXPANDER
+========================================================== */
+
+.streamlit-expanderHeader{
+
+    background:#F8FAFC !important;
+
     color:#111827 !important;
+
+    border-radius:10px;
+
+    font-weight:bold;
+
 }
 
-/* ===========================
-   DOWNLOAD BUTTON
-=========================== */
+/* ==========================================================
+   DATAFRAME
+========================================================== */
 
-[data-testid="stDownloadButton"] *{
+table{
+
+    border-collapse:collapse;
+
+    width:100%;
+
+}
+
+th{
+
+    background:#2563EB !important;
+
     color:white !important;
+
 }
 
-</style>
-""", unsafe_allow_html=True)
+td{
 
+    background:white !important;
+
+    color:#111827 !important;
+
+}
+
+/* ==========================================================
+   PLOTLY CHARTS
+========================================================== */
+
+.js-plotly-plot{
+
+    background:white !important;
+
+    border-radius:18px;
+
+    padding:12px;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+
+}
+
+/* ==========================================================
+   CONTAINERS
+========================================================== */
+
+div[data-testid="stVerticalBlock"]{
+
+    gap:1rem;
+
+}
+
+/* ==========================================================
+   SCROLLBAR
+========================================================== */
+
+::-webkit-scrollbar{
+
+    width:8px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#F1F5F9;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#3B82F6;
+
+    border-radius:10px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:#2563EB;
+
+}
+
+/* ==========================================================
+   HORIZONTAL LINE
+========================================================== */
+
+hr{
+
+    border:1px solid #E5E7EB;
+
+}
+
+/* ==========================================================
+   CARD EFFECT
+========================================================== */
+
+.element-container{
+
+    transition:0.25s ease;
+
+}
+
+.element-container:hover{
+
+    transform:translateY(-2px);
+
+}
+
+/* ==========================================================
+   REMOVE BLACK BACKGROUND
+========================================================== */
+
+[data-testid="stMarkdownContainer"]{
+
+    color:#111827 !important;
+
+}
+
+.stMarkdown{
+
+    color:#111827 !important;
+
+}
+
+.stText{
+
+    color:#111827 !important;
+
+}
+
+div{
+
+    color:#111827;
+
+}
+
+/* ==========================================================
+   FINAL FINISH
+========================================================== */
+
+*{
+
+    font-family:'Segoe UI',sans-serif;
+
+}
 # ==========================================================
 # HERO SECTION
 # ==========================================================
@@ -325,8 +668,10 @@ st.text_area(
     st.session_state.resume_text[:3000],
 
     height=250
+    
 
 )
+
 
 # ======================================================
 # ATS SCORE
