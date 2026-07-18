@@ -54,59 +54,114 @@ st.markdown("""
     background:linear-gradient(to right,#EEF5FF,#F8FAFC);
 }
 
-#MainMenu{
-visibility:hidden;
-}
+/* Hide Streamlit */
 
-footer{
-visibility:hidden;
+#MainMenu{
+    visibility:hidden;
 }
 
 header{
-visibility:hidden;
+    visibility:hidden;
 }
 
+footer{
+    visibility:hidden;
+}
+
+/* ===========================
+   HERO
+=========================== */
+
 .hero{
-
-background:linear-gradient(135deg,#0F172A,#2563EB);
-
-padding:35px;
-
-border-radius:20px;
-
-text-align:center;
-
-color:white;
-
-margin-bottom:30px;
-
-box-shadow:0px 10px 25px rgba(0,0,0,.2);
-
+    background:linear-gradient(135deg,#0F172A,#2563EB);
+    padding:35px;
+    border-radius:20px;
+    text-align:center;
+    margin-bottom:30px;
+    box-shadow:0px 10px 25px rgba(0,0,0,.2);
 }
 
 .hero h1{
-
-color:white !important;
-
-font-size:42px;
-
-font-weight:bold;
-
+    color:white !important;
+    font-size:42px;
+    font-weight:bold;
 }
 
 .hero h3{
-
-color:#E2E8F0 !important;
-
+    color:#E2E8F0 !important;
 }
 
 .hero p{
-
-color:white !important;
-
-font-size:18px;
-
+    color:white !important;
+    font-size:18px;
 }
+
+/* ===========================
+   ALL HEADINGS
+=========================== */
+
+h1:not(.hero h1),
+h2,
+h3:not(.hero h3),
+h4,
+h5,
+h6{
+    color:#111827 !important;
+}
+
+/* ===========================
+   NORMAL TEXT
+=========================== */
+
+p:not(.hero p),
+span,
+label,
+small,
+strong,
+b,
+li,
+div{
+    color:#111827 !important;
+}
+
+/* ===========================
+   METRICS
+=========================== */
+
+[data-testid="stMetricLabel"]{
+    color:#111827 !important;
+}
+
+[data-testid="stMetricValue"]{
+    color:#111827 !important;
+    font-weight:bold;
+}
+
+/* ===========================
+   FILE UPLOADER
+=========================== */
+
+[data-testid="stFileUploader"] *{
+    color:#111827 !important;
+}
+
+/* ===========================
+   TEXT AREA
+=========================== */
+
+textarea{
+    color:#111827 !important;
+}
+
+/* ===========================
+   DOWNLOAD BUTTON
+=========================== */
+
+[data-testid="stDownloadButton"] *{
+    color:white !important;
+}
+
+</style>
 """, unsafe_allow_html=True)
 
 # ==========================================================
