@@ -65,9 +65,10 @@ footer{
 }
 
 .hero h1{
-    color:white !important;
+    color:#111827 !important;
     font-size:42px;
     margin:0;
+    font-weight:700;
 }
 
 .hero h3{
