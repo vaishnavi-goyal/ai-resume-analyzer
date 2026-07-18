@@ -76,6 +76,10 @@ footer{
     margin-top:10px;
 }
 
+h2{
+color:#111827 !important;
+}
+            
 .hero p{
     color:white !important;
     font-size:18px;
