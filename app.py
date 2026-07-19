@@ -10,8 +10,7 @@ from skills import *
 from ats import *
 from charts import *
 from ai_feedback import *
-from report import *
-from interview import *
+from report import create_pdf_report
 from gemini_ai import (
     analyze_resume,
     generate_cover_letter,
@@ -534,28 +533,28 @@ st.subheader("📄 Download Report")
 
 try:
 
+
     pdf = create_pdf_report(
-    ats_score=ats_score,
-    rating=rating,
-    found_skills=found_skills,
-    missing_skills=missing_skills,
-    summary=summary
-)
-
-    st.download_button(
-
-        "📥 Download PDF Report",
-
-        data=pdf,
-
-        file_name="Resume_Report.pdf",
-
-        mime="application/pdf",
-
-        use_container_width=True
-
+        ats_score=ats_score,
+        rating=rating,
+        found_skills=found_skills,
+        missing_skills=missing_skills,
+        feedback=feedback,
+        strength=strength,
+        completeness=complete,
+        roles=roles
     )
 
+    st.download_button(
+        "📥 Download PDF Report",
+        data=pdf,
+        file_name="Resume_Report.pdf",
+        mime="application/pdf",
+        use_container_width=True
+    )
+
+except Exception as e:
+    st.error(f"PDF Error: {e}")
 except Exception as e:
 
     st.error(f"PDF Error : {e}")
@@ -612,15 +611,12 @@ if st.button(
 
     with st.spinner("Writing Cover Letter..."):
 
-        cover_letter = create_pdf_report(
+       cover_letter = generate_cover_letter(
+       st.session_state.resume_text,
+       st.session_state.job_description
+)
 
-            st.session_state.resume_text,
-
-            st.session_state.job_description
-
-        )
-
-        st.text_area(
+    st.text_area(
 
             "Cover Letter",
 
@@ -692,20 +688,14 @@ if st.button(
 
             st.success("Interview Questions")
 
-            if isinstance(questions, list):
-
-                for i, q in enumerate(questions, start=1):
-                    st.write(f"**Q{i}. {q}**")
-
-            else:
-                st.write(questions)
+            for line in questions.split("\n"):
+                if line.strip():
+                    st.write(line)
 
         except Exception as e:
-            st.error(e)
+            st.error(f"Error: {e}")
 
 st.markdown("---")
-
-
 # ==========================================================
 # COMPANY MATCH
 # ==========================================================
@@ -756,9 +746,9 @@ if st.button(
         try:
 
             roadmap = career_roadmap(
-                found_skills,
-                missing_skills
-            )
+            st.session_state.resume_text,
+            st.session_state.job_description
+)
 
             st.write(roadmap)
 
