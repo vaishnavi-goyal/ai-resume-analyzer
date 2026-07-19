@@ -49,20 +49,19 @@ def ats_gauge(score):
 
 def skill_pie(found, missing):
 
+    if found == 0 and missing == 0:
+        found = 1
+        missing = 0
+
     fig = px.pie(
-
-        names=["Matched Skills","Missing Skills"],
-
+        names=["Matched Skills", "Missing Skills"],
         values=[found, missing],
-
-        hole=.55
-
+        hole=0.55
     )
 
     fig.update_layout(height=350)
 
     return fig
-
 
 # ==========================================================
 # Resume Statistics
