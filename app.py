@@ -107,8 +107,6 @@ with st.sidebar:
 
     st.markdown("---")
 
-    st.info("Version 3.0")
-
     st.caption("Developed by Vaishnavi Goyal")
 
     # ==========================================================
