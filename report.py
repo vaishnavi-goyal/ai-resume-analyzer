@@ -1,47 +1,46 @@
+from io import BytesIO
+
 from reportlab.platypus import (
     SimpleDocTemplate,
     Paragraph,
-    Spacer
+    Spacer,
+    Table,
+    TableStyle
 )
 
 from reportlab.lib.styles import getSampleStyleSheet
+from reportlab.lib import colors
 
 
 # ==========================================================
 # PDF REPORT
 # ==========================================================
 
-def generate_pdf_report(
-
-        filename,
-
-        ats_score,
-
-        rating,
-
-        found_skills,
-
-        missing_skills,
-
-        feedback,
-
-        strength,
-
-        completeness,
-
-        roles
-
+def create_pdf_report(
+    ats_score,
+    rating,
+    found_skills,
+    missing_skills,
+    feedback,
+    strength,
+    completeness,
+    roles
 ):
+    """
+    Generate Resume Report PDF and return BytesIO buffer
+    """
+
+    buffer = BytesIO()
 
     styles = getSampleStyleSheet()
 
-    pdf = SimpleDocTemplate(filename)
+    pdf = SimpleDocTemplate(buffer)
 
     story = []
 
-    # --------------------------------------------
+    # ======================================================
     # TITLE
-    # --------------------------------------------
+    # ======================================================
 
     story.append(
         Paragraph(
@@ -50,51 +49,52 @@ def generate_pdf_report(
         )
     )
 
-    story.append(Spacer(1,20))
+    story.append(Spacer(1, 20))
 
-    # --------------------------------------------
-    # ATS
-    # --------------------------------------------
+    # ======================================================
+    # ATS TABLE
+    # ======================================================
 
-    story.append(
-        Paragraph(
-            f"<b>ATS Score :</b> {ats_score}%",
-            styles["Heading2"]
-        )
+    table_data = [
+
+        ["ATS Score", f"{ats_score}%"],
+
+        ["Rating", rating],
+
+        ["Resume Strength", f"{strength}/100"],
+
+        ["Resume Completeness", f"{completeness}%"]
+
+    ]
+
+    table = Table(table_data, colWidths=[180, 250])
+
+    table.setStyle(
+
+        TableStyle([
+
+            ("BACKGROUND", (0,0), (-1,0), colors.lightblue),
+
+            ("GRID", (0,0), (-1,-1), 1, colors.black),
+
+            ("BACKGROUND", (0,1), (0,-1), colors.whitesmoke),
+
+            ("FONTNAME", (0,0), (-1,-1), "Helvetica-Bold"),
+
+            ("BOTTOMPADDING", (0,0), (-1,-1), 8),
+
+            ("TOPPADDING", (0,0), (-1,-1), 8)
+
+        ])
+
     )
 
-    story.append(
-        Paragraph(
-            f"<b>Rating :</b> {rating}",
-            styles["BodyText"]
-        )
-    )
+    story.append(table)
 
-    story.append(Spacer(1,15))
-
-    # --------------------------------------------
-    # Resume Quality
-    # --------------------------------------------
-
-    story.append(
-        Paragraph(
-            f"<b>Resume Strength :</b> {strength}/100",
-            styles["BodyText"]
-        )
-    )
-
-    story.append(
-        Paragraph(
-            f"<b>Resume Completeness :</b> {completeness}%",
-            styles["BodyText"]
-        )
-    )
-
-    story.append(Spacer(1,15))
-
-    # --------------------------------------------
-    # Skills
-    # --------------------------------------------
+    story.append(Spacer(1, 20))
+        # ======================================================
+    # DETECTED SKILLS
+    # ======================================================
 
     story.append(
         Paragraph(
@@ -103,20 +103,31 @@ def generate_pdf_report(
         )
     )
 
-    for skill in found_skills:
+    if found_skills:
+
+        for skill in found_skills:
+
+            story.append(
+                Paragraph(
+                    f"• {skill}",
+                    styles["BodyText"]
+                )
+            )
+
+    else:
 
         story.append(
             Paragraph(
-                f"• {skill}",
+                "No skills detected.",
                 styles["BodyText"]
             )
         )
 
-    story.append(Spacer(1,15))
+    story.append(Spacer(1, 20))
 
-    # --------------------------------------------
-    # Missing Skills
-    # --------------------------------------------
+    # ======================================================
+    # MISSING SKILLS
+    # ======================================================
 
     story.append(
         Paragraph(
@@ -140,38 +151,48 @@ def generate_pdf_report(
 
         story.append(
             Paragraph(
-                "No Missing Skills",
+                "No Missing Skills 🎉",
                 styles["BodyText"]
             )
         )
 
-    story.append(Spacer(1,15))
+    story.append(Spacer(1, 20))
 
-    # --------------------------------------------
-    # Career Roles
-    # --------------------------------------------
+    # ======================================================
+    # RECOMMENDED ROLES
+    # ======================================================
 
     story.append(
         Paragraph(
-            "<b>Recommended Roles</b>",
+            "<b>Recommended Career Roles</b>",
             styles["Heading2"]
         )
     )
 
-    for role in roles:
+    if roles:
+
+        for role in roles:
+
+            story.append(
+                Paragraph(
+                    f"• {role}",
+                    styles["BodyText"]
+                )
+            )
+
+    else:
 
         story.append(
             Paragraph(
-                f"• {role}",
+                "No recommendations available.",
                 styles["BodyText"]
             )
         )
 
-    story.append(Spacer(1,15))
-
-    # --------------------------------------------
-    # Feedback
-    # --------------------------------------------
+    story.append(Spacer(1, 20))
+        # ======================================================
+    # AI FEEDBACK
+    # ======================================================
 
     story.append(
         Paragraph(
@@ -182,22 +203,37 @@ def generate_pdf_report(
 
     story.append(
         Paragraph(
-            feedback.replace("\n","<br/>"),
+            feedback.replace("\n", "<br/>"),
             styles["BodyText"]
         )
     )
 
-    story.append(Spacer(1,20))
+    story.append(Spacer(1, 20))
 
-    # --------------------------------------------
-    # Footer
-    # --------------------------------------------
+    # ======================================================
+    # FOOTER
+    # ======================================================
 
     story.append(
         Paragraph(
-            "Generated by AI Resume Analyzer Pro",
+            "Generated by <b>AI Resume Analyzer Pro</b>",
             styles["Italic"]
         )
     )
 
+    story.append(
+        Paragraph(
+            "Thank you for using AI Resume Analyzer Pro.",
+            styles["BodyText"]
+        )
+    )
+
+    # ======================================================
+    # BUILD PDF
+    # ======================================================
+
     pdf.build(story)
+
+    buffer.seek(0)
+
+    return buffer
