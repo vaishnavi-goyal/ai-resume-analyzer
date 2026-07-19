@@ -19,13 +19,13 @@ def calculate_ats_score(resume_text, job_description):
 
     try:
 
-        cv = CountVectorizer()
+        cv = CountVectorizer(stop_words="english")
 
         matrix = cv.fit_transform(text)
 
         similarity = cosine_similarity(matrix)[0][1]
 
-        score = round(similarity * 100, 2)
+        score = min(round(similarity * 100, 2), 100)
 
         return score
 
