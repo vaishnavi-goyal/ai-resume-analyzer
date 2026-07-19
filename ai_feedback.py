@@ -184,4 +184,4 @@ def recommend_roles(found_skills):
     if len(roles) == 0:
         roles.append("Software Developer")
 
-    return roles
+    return list(dict.fromkeys(roles))
