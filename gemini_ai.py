@@ -7,7 +7,8 @@ load_dotenv()
 api_key = os.getenv("GEMINI_API_KEY")
 
 genai.configure(api_key=api_key)
-
+if not api_key:
+    raise ValueError("GEMINI_API_KEY not found. Check your .env file.")
 model = genai.GenerativeModel("gemini-2.5-flash")
 
 
