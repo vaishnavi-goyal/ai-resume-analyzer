@@ -11,7 +11,7 @@ from reportlab.lib.styles import getSampleStyleSheet
 # PDF REPORT
 # ==========================================================
 
-def create_pdf_report(
+def generate_pdf_report(
 
         filename,
 
