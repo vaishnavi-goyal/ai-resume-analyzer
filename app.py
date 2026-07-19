@@ -12,8 +12,14 @@ from charts import *
 from ai_feedback import *
 from report import *
 from interview import *
-from gemini_ai import analyze_resume
-
+from gemini_ai import (
+    analyze_resume,
+    generate_cover_letter,
+    rewrite_resume,
+    generate_interview_questions,
+    company_match,
+    career_roadmap
+)
 
 # ==========================================================
 # PAGE CONFIG
@@ -528,19 +534,13 @@ st.subheader("📄 Download Report")
 
 try:
 
-    pdf = generate_pdf_report(
-
-        ats_score=ats_score,
-
-        rating=rating,
-
-        found_skills=found_skills,
-
-        missing_skills=missing_skills,
-
-        summary=summary
-
-    )
+    pdf = create_pdf_report(
+    ats_score=ats_score,
+    rating=rating,
+    found_skills=found_skills,
+    missing_skills=missing_skills,
+    summary=summary
+)
 
     st.download_button(
 
@@ -612,7 +612,7 @@ if st.button(
 
     with st.spinner("Writing Cover Letter..."):
 
-        cover_letter = generate_cover_letter(
+        cover_letter = create_pdf_report(
 
             st.session_state.resume_text,
 
