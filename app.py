@@ -10,6 +10,7 @@ from skills import *
 from ats import *
 from charts import *
 from ai_feedback import *
+import traceback
 from report import create_pdf_report
 from gemini_ai import (
     analyze_resume,
@@ -564,6 +565,7 @@ st.markdown("---")
 
 
 # ==========================================================
+## ==========================================================
 # AI RESUME REVIEW
 # ==========================================================
 
@@ -579,18 +581,23 @@ if st.button(
 
     with st.spinner("Analyzing Resume..."):
 
-        review = analyze_resume(
+        try:
 
-            st.session_state.resume_text,
+            review = analyze_resume(
 
-            st.session_state.job_description
+                st.session_state.resume_text,
 
-        )
+                st.session_state.job_description
 
-        st.success("Review Generated")
+            )
 
-        st.write(review)
+            st.success("Review Generated")
 
+            st.write(review)
+
+        except Exception:
+
+            st.code(traceback.format_exc())
 
 st.markdown("---")
 
