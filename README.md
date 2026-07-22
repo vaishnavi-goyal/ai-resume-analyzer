@@ -4,6 +4,16 @@ An intelligent Resume Analyzer built with **Python** and **Streamlit** that help
 
 ---
 
+## 🚀 Live Demo
+
+🌐 **Live Application:**  
+https://ai-resume-analyzer-vaishnavi.streamlit.app
+
+💻 **GitHub Repository:**  
+https://github.com/vaishnavi-goyal/ai-resume-analyzer
+
+---
+
 ## 🚀 Features
 
 - 📄 Upload Resume (PDF)
@@ -34,7 +44,7 @@ An intelligent Resume Analyzer built with **Python** and **Streamlit** that help
 
 ## 📂 Project Structure
 
-```
+```text
 AI_Resume_Analyzer/
 │
 ├── app.py
@@ -48,7 +58,6 @@ AI_Resume_Analyzer/
 ├── style.css
 ├── requirements.txt
 ├── README.md
-
 ```
 
 ---
@@ -58,7 +67,7 @@ AI_Resume_Analyzer/
 ### Clone Repository
 
 ```bash
-git clone https://github.com/your-username/AI-Resume-Analyzer.git
+git clone https://github.com/vaishnavi-goyal/AI-Resume-Analyzer.git
 ```
 
 ### Move to Project Folder
@@ -73,7 +82,7 @@ cd AI-Resume-Analyzer
 pip install -r requirements.txt
 ```
 
-### Run Application
+### Run the Application
 
 ```bash
 streamlit run app.py
@@ -85,11 +94,11 @@ streamlit run app.py
 
 1. Upload Resume (PDF)
 2. Extract Resume Text
-3. Analyze Resume Content
+3. Analyze Resume Statistics
 4. Detect Technical Skills
 5. Compare Resume with Job Description
 6. Calculate ATS Score
-7. Generate Feedback
+7. Generate Resume Feedback
 8. Display Interactive Charts
 9. Download PDF Report
 
@@ -97,15 +106,14 @@ streamlit run app.py
 
 ## 📸 Application Features
 
-- Resume Upload
-- ATS Score Dashboard
-- Resume Statistics
-- Skills Detection
-- Missing Skills
-- Resume Strength Analysis
-- Resume Completeness Score
-- Interactive Charts
-- PDF Report Download
+- 📄 Resume Upload
+- 📊 Resume Statistics
+- 🎯 ATS Score Dashboard
+- 💻 Skills Detection
+- ❌ Missing Skills
+- 📋 Resume Quality Analysis
+- 📈 Interactive Charts
+- 📑 PDF Report Download
 
 ---
 
@@ -118,18 +126,25 @@ streamlit run app.py
 - pandas
 - numpy
 
+Install all dependencies using:
+
+```bash
+pip install -r requirements.txt
+```
+
 ---
 
 ## 🎯 Future Improvements
 
 - DOCX Resume Support
-- Multiple Resume Comparison
-- NLP-Based Skill Extraction
-- AI Resume Suggestions
+- AI-Powered Resume Suggestions
 - Resume Keyword Optimization
+- NLP-Based Skill Extraction
+- Resume Comparison
 - Multi-language Support
 
 ---
+
 
 ## 👩‍💻 Developer
 
@@ -137,14 +152,15 @@ streamlit run app.py
 
 BCA Student | Aspiring Machine Learning Engineer
 
+
 ---
 
-## ⭐ If you like this project
+## ⭐ Support
 
-Give this repository a ⭐ on GitHub and share it with others.
+If you found this project helpful, please consider giving it a ⭐ on GitHub.
 
 ---
 
 ## 📜 License
 
-This project is developed for educational and portfolio purposes.
+This project is open-source and intended for educational and portfolio purposes.
