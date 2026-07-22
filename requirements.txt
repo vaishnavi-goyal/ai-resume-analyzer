@@ -1,9 +1,6 @@
 streamlit==1.49.0
-plotly==6.3.0
 PyPDF2==3.0.1
-scikit-learn==1.7.1
+plotly==6.3.0
 reportlab==4.4.3
-google-generativeai==0.8.5
-python-dotenv==1.1.1
-pandas==2.3.1
+pandas==2.3.2
 numpy==2.3.2
