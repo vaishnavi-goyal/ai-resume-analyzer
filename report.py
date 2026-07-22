@@ -1,40 +1,41 @@
-from io import BytesIO
+"""
+report.py
+-----------------------------------
+PDF Report Generator
+"""
 
+from io import BytesIO
+from reportlab.lib import colors
+from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.platypus import (
     SimpleDocTemplate,
     Paragraph,
-    Spacer,
-    Table,
-    TableStyle
+    Spacer
 )
 
-from reportlab.lib.styles import getSampleStyleSheet
-from reportlab.lib import colors
-
+styles = getSampleStyleSheet()
 
 # ==========================================================
-# PDF REPORT
+# CREATE PDF REPORT
 # ==========================================================
 
 def create_pdf_report(
+
+    resume_text,
+
     ats_score,
-    rating,
-    found_skills,
+
+    skills,
+
     missing_skills,
-    feedback,
-    strength,
-    completeness,
-    roles
+
+    feedback
+
 ):
-    """
-    Generate Resume Report PDF and return BytesIO buffer
-    """
 
     buffer = BytesIO()
 
-    styles = getSampleStyleSheet()
-
-    pdf = SimpleDocTemplate(buffer)
+    doc = SimpleDocTemplate(buffer)
 
     story = []
 
@@ -43,172 +44,174 @@ def create_pdf_report(
     # ======================================================
 
     story.append(
+
         Paragraph(
             "<b>AI Resume Analyzer Report</b>",
             styles["Title"]
         )
-    )
-
-    story.append(Spacer(1, 20))
-
-    # ======================================================
-    # ATS TABLE
-    # ======================================================
-
-    table_data = [
-
-        ["ATS Score", f"{ats_score}%"],
-
-        ["Rating", rating],
-
-        ["Resume Strength", f"{strength}/100"],
-
-        ["Resume Completeness", f"{completeness}%"]
-
-    ]
-
-    table = Table(table_data, colWidths=[180, 250])
-
-    table.setStyle(
-
-        TableStyle([
-
-            ("BACKGROUND", (0,0), (-1,0), colors.lightblue),
-
-            ("GRID", (0,0), (-1,-1), 1, colors.black),
-
-            ("BACKGROUND", (0,1), (0,-1), colors.whitesmoke),
-
-            ("FONTNAME", (0,0), (-1,-1), "Helvetica-Bold"),
-
-            ("BOTTOMPADDING", (0,0), (-1,-1), 8),
-
-            ("TOPPADDING", (0,0), (-1,-1), 8)
-
-        ])
 
     )
 
-    story.append(table)
+    story.append(
+        Spacer(1,20)
+    )
 
-    story.append(Spacer(1, 20))
-        # ======================================================
+    # ======================================================
+    # ATS SCORE
+    # ======================================================
+
+    story.append(
+
+        Paragraph(
+            f"<b>ATS Score :</b> {ats_score}%",
+            styles["Heading2"]
+        )
+
+    )
+
+    story.append(
+        Spacer(1,15)
+    )
+
+    # ======================================================
     # DETECTED SKILLS
     # ======================================================
 
     story.append(
+
         Paragraph(
             "<b>Detected Skills</b>",
             styles["Heading2"]
         )
+
     )
 
-    if found_skills:
-
-        for skill in found_skills:
-
-            story.append(
-                Paragraph(
-                    f"• {skill}",
-                    styles["BodyText"]
-                )
-            )
-
-    else:
+    for skill in skills:
 
         story.append(
+
             Paragraph(
-                "No skills detected.",
+                f"• {skill}",
                 styles["BodyText"]
             )
+
         )
 
-    story.append(Spacer(1, 20))
+    story.append(
+        Spacer(1,15)
+    )
 
     # ======================================================
     # MISSING SKILLS
     # ======================================================
 
     story.append(
+
         Paragraph(
             "<b>Missing Skills</b>",
             styles["Heading2"]
         )
+
     )
 
-    if missing_skills:
-
-        for skill in missing_skills:
-
-            story.append(
-                Paragraph(
-                    f"• {skill}",
-                    styles["BodyText"]
-                )
-            )
-
-    else:
+    for skill in missing_skills:
 
         story.append(
+
             Paragraph(
-                "No Missing Skills 🎉",
+                f"• {skill}",
                 styles["BodyText"]
             )
+
         )
-
-    story.append(Spacer(1, 20))
-
-    # ======================================================
-    # RECOMMENDED ROLES
-    # ======================================================
 
     story.append(
-        Paragraph(
-            "<b>Recommended Career Roles</b>",
-            styles["Heading2"]
-        )
+        Spacer(1,15)
     )
-
-    if roles:
-
-        for role in roles:
-
-            story.append(
-                Paragraph(
-                    f"• {role}",
-                    styles["BodyText"]
-                )
-            )
-
-    else:
-
-        story.append(
-            Paragraph(
-                "No recommendations available.",
-                styles["BodyText"]
-            )
-        )
-
-    story.append(Spacer(1, 20))
         # ======================================================
-    # AI FEEDBACK
+    # FEEDBACK
     # ======================================================
 
     story.append(
         Paragraph(
-            "<b>AI Feedback</b>",
+            "<b>Resume Feedback</b>",
             styles["Heading2"]
         )
     )
 
+    if feedback:
+
+        for item in feedback:
+
+            story.append(
+                Paragraph(
+                    f"• {item}",
+                    styles["BodyText"]
+                )
+            )
+
+    else:
+
+        story.append(
+            Paragraph(
+                "No feedback available.",
+                styles["BodyText"]
+            )
+        )
+
+    story.append(
+        Spacer(1, 15)
+    )
+
+    # ======================================================
+    # RESUME PREVIEW
+    # ======================================================
+
     story.append(
         Paragraph(
-            feedback.replace("\n", "<br/>"),
+            "<b>Resume Preview</b>",
+            styles["Heading2"]
+        )
+    )
+
+    preview = resume_text[:1200]
+
+    story.append(
+        Paragraph(
+            preview.replace("\n", "<br/>"),
             styles["BodyText"]
         )
     )
 
-    story.append(Spacer(1, 20))
+    story.append(
+        Spacer(1, 20)
+    )
+
+    # ======================================================
+    # SUMMARY
+    # ======================================================
+
+    story.append(
+        Paragraph(
+            "<b>Summary</b>",
+            styles["Heading2"]
+        )
+    )
+
+    story.append(
+        Paragraph(
+            f"""
+            ATS Score : {ats_score}%<br/>
+            Skills Found : {len(skills)}<br/>
+            Missing Skills : {len(missing_skills)}
+            """,
+            styles["BodyText"]
+        )
+    )
+
+    story.append(
+        Spacer(1, 20)
+    )
 
     # ======================================================
     # FOOTER
@@ -216,14 +219,14 @@ def create_pdf_report(
 
     story.append(
         Paragraph(
-            "Generated by <b>AI Resume Analyzer Pro</b>",
-            styles["Italic"]
+            "<b>Generated by AI Resume Analyzer</b>",
+            styles["Heading3"]
         )
     )
 
     story.append(
         Paragraph(
-            "Thank you for using AI Resume Analyzer Pro.",
+            "Developed by Vaishnavi Goyal",
             styles["BodyText"]
         )
     )
@@ -232,8 +235,10 @@ def create_pdf_report(
     # BUILD PDF
     # ======================================================
 
-    pdf.build(story)
+    doc.build(story)
 
-    buffer.seek(0)
+    pdf = buffer.getvalue()
 
-    return buffer
+    buffer.close()
+
+    return pdf
