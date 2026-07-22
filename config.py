@@ -1,97 +1,87 @@
-# =====================================================
-# APP CONFIG
-# =====================================================
+"""
+config.py
+------------------------------------
+Project Configuration
+"""
 
-APP_NAME = "AI Resume Analyzer Pro"
+# ==========================================================
+# APP DETAILS
+# ==========================================================
 
-APP_VERSION = "2.0"
+APP_NAME = "AI Resume Analyzer"
+
+APP_VERSION = "1.0.0"
 
 AUTHOR = "Vaishnavi Goyal"
 
-# =====================================================
-# SKILLS DATABASE
-# =====================================================
+# ==========================================================
+# SUPPORTED FILE TYPES
+# ==========================================================
+
+ALLOWED_FILE_TYPES = ["pdf"]
+
+MAX_FILE_SIZE_MB = 5
+
+# ==========================================================
+# ATS SETTINGS
+# ==========================================================
+
+MAX_ATS_SCORE = 100
+
+PASSING_SCORE = 70
+
+# ==========================================================
+# DEFAULT TECHNICAL SKILLS
+# ==========================================================
 
 TECH_SKILLS = [
 
-"Python",
-
-"Java",
-
-"C",
-
-"C++",
-
-"SQL",
-
-"HTML",
-
-"CSS",
-
-"JavaScript",
-
-"React",
-
-"Node.js",
-
-"Express",
-
-"MongoDB",
-
-"Git",
-
-"GitHub",
-
-"Pandas",
-
-"NumPy",
-
-"Matplotlib",
-
-"Seaborn",
-
-"TensorFlow",
-
-"Keras",
-
-"Scikit-learn",
-
-"Machine Learning",
-
-"Deep Learning",
-
-"Data Science",
-
-"NLP",
-
-"Computer Vision",
-
-"Power BI",
-
-"Excel",
-
-"Tableau",
-
-"Streamlit",
-
-"Flask",
-
-"Django"
+    "Python",
+    "SQL",
+    "Excel",
+    "Pandas",
+    "NumPy",
+    "Matplotlib",
+    "Seaborn",
+    "Scikit-learn",
+    "Machine Learning",
+    "Deep Learning",
+    "TensorFlow",
+    "Keras",
+    "Power BI",
+    "Tableau",
+    "Git",
+    "GitHub",
+    "Streamlit",
+    "Flask",
+    "Django",
+    "HTML",
+    "CSS",
+    "JavaScript",
+    "C",
+    "C++",
+    "Java"
 
 ]
 
-# =====================================================
+# ==========================================================
 # COLORS
-# =====================================================
+# ==========================================================
 
-PRIMARY = "#2563EB"
+PRIMARY_COLOR = "#2563EB"
 
-SECONDARY = "#4F46E5"
+SUCCESS_COLOR = "#22C55E"
 
-SUCCESS = "#22C55E"
+WARNING_COLOR = "#FACC15"
 
-WARNING = "#F59E0B"
+DANGER_COLOR = "#EF4444"
 
-DANGER = "#EF4444"
+BACKGROUND_COLOR = "#F8FAFC"
 
-BACKGROUND = "#F3F6FB"
+# ==========================================================
+# PDF REPORT
+# ==========================================================
+
+REPORT_TITLE = "Resume Analysis Report"
+
+REPORT_AUTHOR = AUTHOR
