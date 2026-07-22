@@ -1,187 +1,212 @@
-# ==========================================================
-# AI RESUME FEEDBACK
-# ==========================================================
-
-def generate_summary(
-        ats_score,
-        found_skills,
-        missing_skills
-):
-
-    summary = []
-
-    if ats_score >= 85:
-
-        summary.append(
-            "Your resume has a strong ATS score."
-        )
-
-    elif ats_score >= 60:
-
-        summary.append(
-            "Your resume is moderately optimized."
-        )
-
-    else:
-
-        summary.append(
-            "Your resume needs ATS optimization."
-        )
-
-    summary.append(
-        f"Detected Skills : {len(found_skills)}"
-    )
-
-    summary.append(
-        f"Missing Skills : {len(missing_skills)}"
-    )
-
-    return summary
-
+"""
+ai_feedback.py
+------------------------------------
+Resume Feedback Module
+"""
 
 # ==========================================================
-# RESUME SECTION CHECK
+# RESUME SUMMARY
 # ==========================================================
 
-def check_resume_sections(resume_text):
+def generate_summary(resume_text):
 
-    resume = resume_text.lower()
+    words = resume_text.split()
 
-    sections = {
+    if len(words) <= 40:
+        return resume_text
 
-        "Career Objective":[
-            "objective",
-            "summary",
-            "profile"
-        ],
-
-        "Education":[
-            "education",
-            "qualification"
-        ],
-
-        "Skills":[
-            "skills"
-        ],
-
-        "Projects":[
-            "project"
-        ],
-
-        "Experience":[
-            "experience",
-            "internship"
-        ],
-
-        "Certifications":[
-            "certificate",
-            "certification"
-        ]
-
-    }
-
-    result = {}
-
-    for section, keywords in sections.items():
-
-        found = False
-
-        for keyword in keywords:
-
-            if keyword in resume:
-
-                found = True
-
-                break
-
-        result[section] = found
-
-    return result
-
-
-# ==========================================================
-# COMPLETENESS SCORE
-# ==========================================================
-
-def completeness_score(section_result):
-
-    total = len(section_result)
-
-    present = 0
-
-    for value in section_result.values():
-
-        if value:
-
-            present += 1
-
-    return round(
-        (present / total) * 100
-    )
+    return " ".join(words[:40]) + "..."
 
 
 # ==========================================================
 # RESUME STRENGTH
 # ==========================================================
 
-def resume_strength(
-        ats_score,
-        completeness,
-        found_skills
-):
+def resume_strength(resume_text):
 
-    strength = (
+    words = len(resume_text.split())
 
-        ats_score * 0.5
+    if words >= 500:
+        return "Excellent"
 
-        +
+    elif words >= 350:
+        return "Good"
 
-        completeness * 0.3
+    elif words >= 200:
+        return "Average"
 
-        +
-
-        len(found_skills) * 2
-
-    )
-
-    return min(round(strength),100)
+    return "Weak"
 
 
 # ==========================================================
-# CAREER RECOMMENDATION
+# COMPLETENESS SCORE
+# ==========================================================
+
+def completeness_score(resume_text):
+
+    score = 0
+
+    text = resume_text.lower()
+
+    sections = [
+
+        "summary",
+        "education",
+        "skills",
+        "projects",
+        "experience",
+        "certification"
+
+    ]
+
+    for section in sections:
+
+        if section in text:
+
+            score += 100 / len(sections)
+
+    return int(score)
+
+
+# ==========================================================
+# RECOMMENDED ROLES
 # ==========================================================
 
 def recommend_roles(found_skills):
 
     roles = []
 
-    skills = [skill.lower() for skill in found_skills]
+    skills = [s.lower() for s in found_skills]
 
-    if "python" in skills:
-        roles.append("Python Developer")
-
-    if "machine learning" in skills:
+    if "python" in skills and "machine learning" in skills:
         roles.append("Machine Learning Engineer")
 
-    if "data science" in skills:
-        roles.append("Data Scientist")
-
-    if "sql" in skills:
+    if "sql" in skills and "excel" in skills:
         roles.append("Data Analyst")
 
-    if "react" in skills:
+    if "power bi" in skills:
+        roles.append("Business Intelligence Analyst")
+
+    if "streamlit" in skills:
+        roles.append("Python Developer")
+
+    if "html" in skills and "css" in skills:
         roles.append("Frontend Developer")
 
-    if "node.js" in skills or "nodejs" in skills:
-        roles.append("Backend Developer")
+    return roles
+# ==========================================================
+# CHECK RESUME SECTIONS
+# ==========================================================
 
-    if "java" in skills:
-        roles.append("Java Developer")
+def check_resume_sections(resume_text):
 
-    if "c++" in skills:
-        roles.append("Software Engineer")
+    text = resume_text.lower()
 
-    if len(roles) == 0:
-        roles.append("Software Developer")
+    sections = {
 
-    return list(dict.fromkeys(roles))
+        "Summary": "summary" in text or "objective" in text,
+
+        "Education": "education" in text,
+
+        "Skills": "skills" in text,
+
+        "Projects": "project" in text,
+
+        "Experience": "experience" in text or "internship" in text,
+
+        "Certifications": "certification" in text or "certificate" in text
+
+    }
+
+    return sections
+
+
+# ==========================================================
+# RESUME FEEDBACK
+# ==========================================================
+
+def resume_feedback(resume_text):
+
+    feedback = []
+
+    sections = check_resume_sections(resume_text)
+
+    for section, present in sections.items():
+
+        if not present:
+
+            feedback.append(f"Add {section} section.")
+
+    if len(resume_text.split()) < 250:
+
+        feedback.append("Resume is too short. Add more relevant content.")
+
+    elif len(resume_text.split()) > 700:
+
+        feedback.append("Resume is too long. Keep it within 1-2 pages.")
+
+    else:
+
+        feedback.append("Resume length looks good.")
+
+    return feedback
+
+
+# ==========================================================
+# IMPROVEMENT SUGGESTIONS
+# ==========================================================
+
+def improvement_suggestions(resume_text):
+
+    suggestions = []
+
+    text = resume_text.lower()
+
+    if "github.com" not in text:
+
+        suggestions.append("Add your GitHub profile.")
+
+    if "linkedin.com" not in text:
+
+        suggestions.append("Add your LinkedIn profile.")
+
+    if "project" not in text:
+
+        suggestions.append("Include at least 2 projects.")
+
+    if "certificate" not in text:
+
+        suggestions.append("Add your certifications.")
+
+    if "achievement" not in text:
+
+        suggestions.append("Mention achievements or awards.")
+
+    return suggestions
+
+
+# ==========================================================
+# CAREER TIPS
+# ==========================================================
+
+def career_tips():
+
+    return [
+
+        "Keep your resume updated.",
+
+        "Customize resume for every job.",
+
+        "Use ATS-friendly keywords.",
+
+        "Show measurable achievements.",
+
+        "Keep formatting simple.",
+
+        "Mention technical skills clearly.",
+
+        "Add internships and projects.",
+
+        "Proofread before applying."
+
+    ]
