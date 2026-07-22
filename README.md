@@ -48,7 +48,7 @@ AI_Resume_Analyzer/
 ├── style.css
 ├── requirements.txt
 ├── README.md
-└── .gitignore
+
 ```
 
 ---
