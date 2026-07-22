@@ -2,440 +2,137 @@
    GLOBAL
 ========================================================== */
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:"Segoe UI",sans-serif;
+body {
+    font-family: "Segoe UI", sans-serif;
+    background-color: #f5f7fb;
 }
 
-.stApp{
-    background:linear-gradient(135deg,#EEF5FF,#F8FAFC);
-}
-
-/* Hide Streamlit */
-
-#MainMenu{
-    visibility:hidden;
-}
-
-header{
-    visibility:hidden;
-}
-
-footer{
-    visibility:hidden;
+.main {
+    padding: 2rem;
 }
 
 /* ==========================================================
-   HERO SECTION
+   TITLE
 ========================================================== */
 
-.hero{
-
-    background:linear-gradient(135deg,#0F172A,#2563EB);
-
-    padding:40px;
-
-    border-radius:22px;
-
-    text-align:center;
-
-    margin-bottom:35px;
-
-    box-shadow:0 10px 30px rgba(0,0,0,.18);
-
+h1 {
+    color: #2563eb;
+    font-weight: 700;
 }
 
-.hero h1{
-
-    color:white !important;
-
-    font-size:42px;
-
-    font-weight:700;
-
-    margin-bottom:10px;
-
-}
-
-.hero h3{
-
-    color:#E2E8F0 !important;
-
-    font-size:24px;
-
-    margin-bottom:18px;
-
-}
-
-.hero p{
-
-    color:white !important;
-
-    font-size:18px;
-
-    line-height:1.7;
-
-}
-
-/* ==========================================================
-   HEADINGS
-========================================================== */
-
-h1,h2,h3,h4,h5,h6{
-
-    color:#111827 !important;
-
-    font-weight:700 !important;
-
-}
-
-/* ==========================================================
-   NORMAL TEXT
-========================================================== */
-
-p,
-span,
-label,
-small,
-strong,
-b,
-li{
-
-    color:#111827 !important;
-
-}
-
-/* ==========================================================
-   FILE UPLOADER
-========================================================== */
-
-[data-testid="stFileUploader"]{
-
-    background:white !important;
-
-    border:2px dashed #3B82F6 !important;
-
-    border-radius:18px;
-
-    padding:18px;
-
-}
-
-[data-testid="stFileUploaderDropzone"]{
-
-    background:white !important;
-
-    border:none !important;
-
-}
-
-[data-testid="stFileUploader"] *{
-
-    color:#111827 !important;
-
-}
-/* ==========================================================
-   GLOBAL
-========================================================== */
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:"Segoe UI",sans-serif;
-}
-
-.stApp{
-    background:linear-gradient(135deg,#EEF5FF,#F8FAFC);
-}
-
-/* Hide Streamlit */
-
-#MainMenu{
-    visibility:hidden;
-}
-
-header{
-    visibility:hidden;
-}
-
-footer{
-    visibility:hidden;
-}
-
-/* ==========================================================
-   HERO SECTION
-========================================================== */
-
-.hero{
-
-    background:linear-gradient(135deg,#0F172A,#2563EB);
-
-    padding:40px;
-
-    border-radius:22px;
-
-    text-align:center;
-
-    margin-bottom:35px;
-
-    box-shadow:0 10px 30px rgba(0,0,0,.18);
-
-}
-
-.hero h1{
-
-    color:white !important;
-
-    font-size:42px;
-
-    font-weight:700;
-
-    margin-bottom:10px;
-
-}
-
-.hero h3{
-
-    color:#E2E8F0 !important;
-
-    font-size:24px;
-
-    margin-bottom:18px;
-
-}
-
-.hero p{
-
-    color:white !important;
-
-    font-size:18px;
-
-    line-height:1.7;
-
-}
-
-/* ==========================================================
-   HEADINGS
-========================================================== */
-
-h1,h2,h3,h4,h5,h6{
-
-    color:#111827 !important;
-
-    font-weight:700 !important;
-
-}
-
-/* ==========================================================
-   NORMAL TEXT
-========================================================== */
-
-p,
-span,
-label,
-small,
-strong,
-b,
-li{
-
-    color:#111827 !important;
-
-}
-
-/* ==========================================================
-   FILE UPLOADER
-========================================================== */
-
-[data-testid="stFileUploader"]{
-
-    background:white !important;
-
-    border:2px dashed #3B82F6 !important;
-
-    border-radius:18px;
-
-    padding:18px;
-
-}
-
-[data-testid="stFileUploaderDropzone"]{
-
-    background:white !important;
-
-    border:none !important;
-
-}
-
-[data-testid="stFileUploader"] *{
-
-    color:#111827 !important;
-
-}
-/* ==========================================================
-   TEXT AREA
-========================================================== */
-
-textarea{
-
-    background:#FFFFFF !important;
-
-    color:#111827 !important;
-
-    border:2px solid #CBD5E1 !important;
-
-    border-radius:12px !important;
-
-    padding:12px !important;
-
-}
-
-[data-testid="stTextArea"] textarea{
-
-    background:#FFFFFF !important;
-
-    color:#111827 !important;
-
-}
-
-/* ==========================================================
-   BUTTONS
-========================================================== */
-
-.stButton>button{
-
-    width:100%;
-
-    height:52px;
-
-    background:#2563EB !important;
-
-    color:white !important;
-
-    font-size:18px;
-
-    font-weight:600;
-
-    border:none;
-
-    border-radius:12px;
-
-    cursor:pointer;
-
-    transition:all .3s ease;
-
-}
-
-.stButton>button:hover{
-
-    background:#1D4ED8 !important;
-
-    transform:translateY(-2px);
-
-    box-shadow:0 8px 20px rgba(37,99,235,.25);
-
-}
-
-/* ==========================================================
-   DOWNLOAD BUTTON
-========================================================== */
-
-[data-testid="stDownloadButton"] button{
-
-    width:100%;
-
-    height:52px;
-
-    background:#10B981 !important;
-
-    color:white !important;
-
-    border:none;
-
-    border-radius:12px;
-
-    font-size:18px;
-
-    font-weight:600;
-
-}
-
-[data-testid="stDownloadButton"] button:hover{
-
-    background:#059669 !important;
-
-}
-
-/* ==========================================================
-   METRIC CARDS
-========================================================== */
-
-[data-testid="metric-container"]{
-
-    background:#FFFFFF !important;
-
-    border-radius:16px;
-
-    padding:18px;
-
-    border:1px solid #E5E7EB;
-
-    box-shadow:0 5px 15px rgba(0,0,0,.08);
-
-}
-
-[data-testid="stMetricLabel"]{
-
-    color:#111827 !important;
-
-    font-weight:600;
-
-}
-
-[data-testid="stMetricValue"]{
-
-    color:#2563EB !important;
-
-    font-size:34px !important;
-
-    font-weight:bold;
-
+h2, h3 {
+    color: #1e293b;
 }
 
 /* ==========================================================
    SIDEBAR
 ========================================================== */
 
-section[data-testid="stSidebar"]{
-
-    background:#FFFFFF !important;
-
-    border-right:1px solid #E5E7EB;
-
-}
-
-section[data-testid="stSidebar"] *{
-
-    color:#111827 !important;
-
+section[data-testid="stSidebar"] {
+    background-color: #0f172a;
 }
 
 section[data-testid="stSidebar"] h1,
 section[data-testid="stSidebar"] h2,
-section[data-testid="stSidebar"] h3{
-
-    color:#2563EB !important;
-
+section[data-testid="stSidebar"] h3,
+section[data-testid="stSidebar"] p,
+section[data-testid="stSidebar"] label {
+    color: white;
 }
 
 /* ==========================================================
-   DIVIDER
+   BUTTON
 ========================================================== */
 
-hr{
+.stButton > button {
+    width: 100%;
+    background-color: #2563eb;
+    color: white;
+    border-radius: 10px;
+    height: 50px;
+    border: none;
+    font-weight: bold;
+}
 
-    border:1px solid #E5E7EB;
+.stButton > button:hover {
+    background-color: #1d4ed8;
+}
 
+/* ==========================================================
+   DOWNLOAD BUTTON
+========================================================== */
+
+.stDownloadButton > button {
+    width: 100%;
+    background-color: #16a34a;
+    color: white;
+    border-radius: 10px;
+    height: 50px;
+    border: none;
+    font-weight: bold;
+}
+
+.stDownloadButton > button:hover {
+    background-color: #15803d;
+}
+
+/* ==========================================================
+   FILE UPLOADER
+========================================================== */
+
+[data-testid="stFileUploader"] {
+    border: 2px dashed #2563eb;
+    border-radius: 12px;
+    padding: 15px;
+}
+
+/* ==========================================================
+   TEXT AREA
+========================================================== */
+
+textarea {
+    border-radius: 10px !important;
+}
+
+/* ==========================================================
+   METRIC CARDS
+========================================================== */
+
+[data-testid="metric-container"] {
+    background: white;
+    border-radius: 12px;
+    padding: 15px;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0px 2px 8px rgba(0,0,0,0.08);
+}
+
+/* ==========================================================
+   SUCCESS / INFO / WARNING
+========================================================== */
+
+.stSuccess,
+.stInfo,
+.stWarning,
+.stError {
+    border-radius: 10px;
+}
+
+/* ==========================================================
+   EXPANDER
+========================================================== */
+
+details {
+    border-radius: 10px;
+    border: 1px solid #ddd;
+}
+
+/* ==========================================================
+   FOOTER
+========================================================== */
+
+.footer {
+    text-align: center;
+    padding: 20px;
+    color: gray;
+    font-size: 14px;
 }
