@@ -273,3 +273,26 @@ background:#F5F9FF;
 .main{
 background:#F5F9FF;
 }
+/* Hero Section Text Color */
+
+.hero h1{
+    color:#000000 !important;
+}
+
+.hero p{
+    color:#222222 !important;
+}
+
+.hero-icon{
+    color:white !important;
+}
+
+/* Agar aur text bhi light dikh raha ho */
+
+.hero *{
+    color:#000000 !important;
+}
+
+.hero .hero-icon{
+    color:white !important;
+}
