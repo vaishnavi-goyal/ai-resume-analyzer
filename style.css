@@ -275,24 +275,26 @@ background:#F5F9FF;
 }
 /* Hero Section Text Color */
 
-.hero h1{
-    color:#000000 !important;
+.hero-title{
+
+font-size:42px;
+
+font-weight:700;
+
+color:#111827;
+
+margin-bottom:12px;
+
 }
 
-.hero p{
-    color:#222222 !important;
-}
+.hero-text{
 
-.hero-icon{
-    color:white !important;
-}
+font-size:18px;
 
-/* Agar aur text bhi light dikh raha ho */
+line-height:1.8;
 
-.hero *{
-    color:#000000 !important;
-}
+color:#374151;
 
-.hero .hero-icon{
-    color:white !important;
+max-width:850px;
+
 }
