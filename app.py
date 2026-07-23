@@ -28,14 +28,11 @@ st.set_page_config(
 # LOAD CSS
 # ==========================================================
 
-try:
-    with open("style.css") as f:
-        st.markdown(
-            f"<style>{f.read()}</style>",
-            unsafe_allow_html=True
-        )
-except:
-    pass
+with open("style.css", encoding="utf-8") as f:
+    st.markdown(
+        f"<style>{f.read()}</style>",
+        unsafe_allow_html=True
+    )
 
 # ==========================================================
 # SESSION STATE
