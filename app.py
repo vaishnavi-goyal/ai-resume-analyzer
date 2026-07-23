@@ -109,17 +109,25 @@ with st.sidebar:
 # HERO SECTION
 # ==========================================================
 
-st.title("📄 AI Resume Analyzer")
+st.markdown("""
+<div class="hero">
 
-st.markdown(
-    """
+<div class="hero-icon"></div>
+
+<div>
+
+<h1>AI Resume Analyzer</h1>
+
+<p>
 Analyze your resume, calculate ATS score,
 detect technical skills, identify missing skills,
 and download a professional PDF report.
-"""
-)
+</p>
 
-st.write("---")
+</div>
+
+</div>
+""", unsafe_allow_html=True)
 # ==========================================================
 # RESUME UPLOAD
 # ==========================================================
