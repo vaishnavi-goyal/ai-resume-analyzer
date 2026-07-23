@@ -62,29 +62,48 @@ if "missing_skills" not in st.session_state:
 
 with st.sidebar:
 
-    st.image(
-        "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
-        width=120
-    )
+    st.markdown("""
+    <div align="center">
 
-    st.title("📄 Resume Analyzer")
+    <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+    width="100">
 
-    st.write("---")
+    <h2 class="sidebar-title">
+    Resume Analyzer
+    </h2>
 
-    st.markdown("### Features")
+    <p class="sidebar-subtitle">
+    AI Powered ATS Checker
+    </p>
 
-    st.success("✅ Resume Parsing")
-    st.success("✅ ATS Score")
-    st.success("✅ Skills Detection")
-    st.success("✅ Missing Skills")
-    st.success("✅ Resume Feedback")
-    st.success("✅ Charts")
-    st.success("✅ PDF Report")
+    </div>
 
-    st.write("---")
+    <hr>
 
-    st.caption(f"Version : {APP_VERSION}")
-    st.caption(f"Developed by {AUTHOR}")
+    <h3>✨ Features</h3>
+
+    <div class="feature-card">✅ Resume Parsing</div>
+
+    <div class="feature-card">🎯 ATS Score</div>
+
+    <div class="feature-card">💻 Skills Detection</div>
+
+    <div class="feature-card">📌 Missing Skills</div>
+
+    <div class="feature-card">💡 Resume Feedback</div>
+
+    <div class="feature-card">📊 Charts</div>
+
+    <div class="feature-card">📄 PDF Report</div>
+
+    <hr>
+
+    <div class="developer">
+        Developed by<br>
+        <b>Vaishnavi Goyal</b>
+    </div>
+
+    """, unsafe_allow_html=True)
 
 # ==========================================================
 # HERO SECTION
