@@ -108,21 +108,22 @@ with st.sidebar:
 # ==========================================================
 # HERO SECTION
 # ==========================================================
-
 st.markdown("""
 <div class="hero">
 
-<div class="hero-icon"></div>
+<div class="hero-icon">📄</div>
 
 <div>
 
-<h1>AI Resume Analyzer</h1>
+<div class="hero-title">
+AI Resume Analyzer
+</div>
 
-<p>
+<div class="hero-text">
 Analyze your resume, calculate ATS score,
 detect technical skills, identify missing skills,
 and download a professional PDF report.
-</p>
+</div>
 
 </div>
 
