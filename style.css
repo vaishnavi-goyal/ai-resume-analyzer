@@ -319,3 +319,37 @@ h6 {
 [data-testid="stMarkdownContainer"] h6 {
     color: #000000 !important;
 }
+/* ===== ALL TEXT BLACK ===== */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+label,
+span,
+div {
+    color: #000000 !important;
+}
+
+/* Streamlit Markdown */
+
+[data-testid="stMarkdownContainer"] * {
+    color: #000000 !important;
+}
+
+/* Metrics */
+
+[data-testid="metric-container"] label,
+[data-testid="metric-container"] div,
+[data-testid="metric-container"] span {
+    color: #000000 !important;
+}
+
+/* Success, Info, Warning, Error */
+
+[data-testid="stAlertContainer"] * {
+    color: #000000 !important;
+}
